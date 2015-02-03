@@ -1,0 +1,48 @@
+{
+  "name": "cx-lang",
+  "version": "0.0.2",
+  "description": "A statically typed programming language that transpiles to other languages, including: JavaScript, C++, C#",
+  "keywords": [
+    "cx",
+    "cx-lang",
+    "js",
+    "javascript",
+    "c#",
+    "csharp",
+    "c++",
+    "cplusplus",
+    "parser",
+    "vm",
+    "transpiler"
+  ],
+  "homepage": "https://cx-lang.github.io/",
+  "author": {
+    "name": "Futago-za Ryuu",
+    "email": "futagoza.ryuu@gmail.com",
+    "url": "https://futagoza.github.io/"
+  },
+  "license": "MIT",
+  "main": "lib/cx.js",
+  "bin": {
+    "pegjs": "bin/cx"
+  },
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/cx-lang/cx-lang.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cx-lang/cx-lang/issues"
+  },
+  "devDependencies": {
+    "uglifyjs": "2.3.6",
+    "mkdirp": "0.5.0",
+    "debug": "2.1.0",
+    "pegjs": "git://github.com/cx-lang/pegjs.git"
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  }
+}
