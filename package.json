@@ -1,19 +1,26 @@
 {
   "name": "cx-lang",
-  "version": "0.0.2",
-  "description": "A statically typed programming language that transpiles to other languages, including: JavaScript, C++, C#",
+  "version": "0.0.3",
+  "description": "A statically typed programming language that transpiles to other languages, including: JavaScript, C++ and C#",
   "keywords": [
     "cx",
     "cx-lang",
+    "tokenizer",
+    "lexer",
+    "parser",
+    "ast",
+    "vm",
+    "compiler",
+    "bytecode",
+    "transpiler",
     "js",
     "javascript",
     "c#",
     "csharp",
     "c++",
     "cplusplus",
-    "parser",
-    "vm",
-    "transpiler"
+    "cli",
+    "repl"
   ],
   "homepage": "https://cx-lang.github.io/",
   "author": {
@@ -22,12 +29,13 @@
     "url": "https://futagoza.github.io/"
   },
   "license": "MIT",
-  "main": "lib/cx.js",
+  "main": "index.js",
   "bin": {
     "pegjs": "bin/cx"
   },
   "scripts": {
-    "test": "node test"
+    "install": "node build *",
+    "test": "node test *"
   },
   "repository": {
     "type": "git",
@@ -37,12 +45,13 @@
     "url": "https://github.com/cx-lang/cx-lang/issues"
   },
   "devDependencies": {
-    "uglifyjs": "2.3.6",
+    "uglify-js": "2.4.16",
+    "graceful-fs": "3.0.5",
+    "fs-extra": "0.16.3",
+    "glob":  "4.3.5",
     "mkdirp": "0.5.0",
-    "debug": "2.1.0",
-    "pegjs": "git://github.com/cx-lang/pegjs.git"
-  },
-  "engines": {
-    "node": ">= 0.10.0"
+    "rimraf": "2.2.8",
+    "metascript": "1.0.0",
+    "ungit": "0.8.4"
   }
 }
