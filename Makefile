@@ -1,40 +1,25 @@
-status:
-	git status -s
+parser:
+	node build/parser
 
-ungit:
-	ungit --urlBase http://$IP --port $PORT
-
-build:
-	node build all
-
-lib:
-	node build lib
+compiler:
+	node build/compiler
 
 dist:
-	node build dist
-
-std:
-	node build std
-
-docs:
-	node build docs
+	node build/dist
 
 test:
-	node test all
+	node test
 
 benchmark:
-	node test benchmark
-
-lint:
-	node test lint
+	node test/benchmark
 
 spec:
-	node test spec
+	node test/spec
 
 clean:
+  rm -f lib/parser.js
+	rm -rf lib/compiler
 	rm -rf dist
-	rm -rf docs
-	rm -rf test/*/results
 
-.PHONY:  status ungit build lib dist std docs test benchmark lint spec clean
-.SILENT: status ungit build lib dist std docs test benchmark lint spec clean
+.PHONY:  parser compiler dist test benchmark spec clean
+.SILENT: parser compiler dist test benchmark spec clean
