@@ -1,1 +1,19 @@
 #!/usr/bin/env node
+var efe = require('efe');
+var CoffeeScript = require('coffee-script');
+
+var SRC = efe.join(__dirname, '../src/compiler');
+var LIB = efe.join(__dirname, '../lib/compiler');
+var options = { header: true, bare: true };
+
+efe.walkSync(SRC, function(path, stats){
+  var target = path.replace(SRC, LIB), data;
+  if ( stats.extname === '.coffee' ) {
+    options.filename = path;
+    data = efe.readFileSync(path).toString();
+    if ( data.charCodeAt(0) === 0xFEFF ) data = data.substring(1);
+    efe.writeFileSync(target.slice(0, -6) + 'js', CoffeeScript.compile(data, options));
+  } else {
+    efe.copySync(path, target);
+  }
+});

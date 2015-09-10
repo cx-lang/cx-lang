@@ -17,7 +17,7 @@ spec:
 	node test/spec
 
 clean:
-  rm -f lib/parser.js
+	rm -f lib/parser.js
 	rm -rf lib/compiler
 	rm -rf dist
 

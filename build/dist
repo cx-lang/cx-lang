@@ -1,1 +1,75 @@
 #!/usr/bin/env node
+var efe = require('efe');
+var UglifyJS = require('uglify-js');
+var EOL = require('os').EOL;
+
+var newLineChars = /(\n|\r\n|\r|\u2028|\u2029)/g;
+function indent ( data, tabs ) {
+  return (tabs || "  ") + data.replace(newLineChars, function(m, nl){ return nl + (tabs || "  "); });
+}
+
+var ROOT_DIR = efe.join(__dirname, '..');
+var DIST_DIR = efe.join(ROOT_DIR, 'dist');
+var pkg = efe.join(ROOT_DIR, 'package.json');
+var version = require(pkg).version;
+var ENTRY_ID = null;
+
+var modules = [];
+function addModule ( filename, stat ){
+  var data = efe.readFileSync(filename).toString().trim();
+  var id = filename.replace(ROOT_DIR, 'cx').replace(/\\/g, "/");
+  if ( stat.extname !== '.json' ) {
+    id = id.split('.').slice(0, -1).join('.');
+  }
+  var params = "module, exports ";
+  if ( data.indexOf('exports') === -1 ) {
+    params = "module ";
+    if ( data.indexOf('module') === -1 ) {
+      params = "";
+    }
+  }
+  modules.push(
+    "'" + id + "': function ( " + params + ") {" + EOL + (
+      stat.extname === '.json' ?
+        indent("return " + data + ";")
+      :
+        indent(data).replace(/require\s*?\(\s*?("|')(.*)("|')\s*?\)/g, function(m, openOp, request, closeOp, index){
+          var location = 'require statement in "' + filename + '" at ' + index;
+          if ( openOp !== closeOp ) {
+            throw new SyntaxError(location + ' has mismatched opening and closing characters.');
+          }
+          var first = request.charAt(0);
+          if ( first === '/' || first === '\\' ) {
+            throw new SyntaxError(location + ' is pointing to an absolute path.');
+          }
+          if ( first === '.' ) {
+            request = efe.resolve(stat.dirname, request);
+            try {
+              if ( efe.isDirectorySync(request) ) {
+                request = efe.join(request, 'index');
+              }
+            } catch ( e ) {}
+            request = request.replace(ROOT_DIR, 'cx').replace(/\\/g, "/");
+          }
+          return "require(" + openOp + request + closeOp + ")";
+        })
+    ) + EOL + "}"
+  );
+}
+
+addModule(pkg, efe.lstatSync(pkg));
+efe.walkSync(efe.join(ROOT_DIR, 'lib'), addModule);
+
+var output = efe.readFileSync(efe.join(__dirname, '../src/dist-template.js')).toString()
+  .replace('__MODULES__', indent(modules.join("," + EOL + EOL), "    "))
+  .replace('__VERSION__', version)
+  .replace('__ENTRY_ID__', ENTRY_ID);
+var minified = "// cx-lang v" + version +
+  ", Copyright (c) 2014-2015 Futago-za Ryuu <futagoza.ryuu@gmail.com>" +
+  ", Released under the MIT License: opensource.org/licenses/MIT" + EOL +
+  UglifyJS.minify(output, { fromString: true }).code;
+
+efe.writeFileSync(efe.join(DIST_DIR, 'cx-' + version + '.js'), output);
+efe.writeFileSync(efe.join(DIST_DIR, 'cx-' + version + '.min.js'), minified);
+efe.writeFileSync(efe.join(DIST_DIR, 'cx-latest.js'), output);
+efe.writeFileSync(efe.join(DIST_DIR, 'cx-latest.min.js'), minified);

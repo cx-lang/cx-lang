@@ -1,1 +1,20 @@
 #!/usr/bin/env node
+var efe = require('efe');
+var PEG = require('pegjs');
+var EOL = require('os').EOL;
+
+var parser = efe.readFileSync(efe.join(__dirname, '../src/parser.pegjs')).toString(), separator;
+
+try {
+  parser = "module.exports = " + PEG.buildParser(parser, { output: "source" }) + ";" + EOL;
+} catch ( e ) {
+  if ( typeof e.line === 'number' ) {
+    separator = " @ " + e.line + ":" + e.column + ") "
+  } else {
+    separator = ": "
+  }
+  console.error(EOL + e.name + separator + e.message + EOL);
+  process.exit(1);
+}
+
+efe.writeFileSync(efe.join(__dirname, '../lib/parser.js'), parser);
