@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+var cx = require('../');
+var fs = require('efe');
+
+var argv = process.argv.slice(2);
+var cwd = process.cwd();

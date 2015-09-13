@@ -1,8 +1,0 @@
-#!/usr/bin/env node
-var argv = process.argv.slice(2);
-var cwd = process.cwd();
-if ( argv.length ) {
-  require("./cli")(cwd, argv);
-} else {
-  require("./repl")(cwd);
-}
