@@ -3,18 +3,85 @@ var efe = require('efe');
 var PEG = require('pegjs');
 var EOL = require('os').EOL;
 
-var parser = efe.readFileSync(efe.join(__dirname, '../src/parser.pegjs')).toString(), separator;
-
-try {
-  parser = "module.exports = " + PEG.buildParser(parser, { output: "source" }) + ";" + EOL;
-} catch ( e ) {
-  if ( typeof e.line === 'number' ) {
-    separator = " @ " + e.line + ":" + e.column + ") "
-  } else {
-    separator = ": "
+var __lstatSync = require('fs').lstatSync;
+efe.existsSync = function ( path ) {
+  try {
+    __lstatSync(path);
+    return true;
+  } catch ( err ) {
+    if ( err.code !== 'ENOENT' ) throw err;
+    return false;
   }
-  console.error(EOL + e.name + separator + e.message + EOL);
-  process.exit(1);
+};
+
+var SRC_DIR = efe.join(__dirname, '../src');
+var newLineChars = /(\n|\r\n|\r|\u2028|\u2029)/g;
+function indent ( data ) {
+  return "  " + data.replace(newLineChars, function(m, nl){ return nl + "  "; });
 }
 
-efe.writeFileSync(efe.join(__dirname, '../lib/parser.js'), parser);
+function preprocess ( input ) {
+  var _included = [];
+
+  function createOutput ( filename, data ) {
+    var content = "";
+    if ( data.trim() !== '' ) {
+      content += "// @source: " + filename.replace(SRC_DIR, '.').replace(/\\/g, '/') + "\n\n" + indent(data);
+    }
+    return content;
+  }
+
+  function commentedOut ( index, content ) {
+    while ( (/( |\t)/).test(content.charAt(index - 1)) ) --index;
+    return content.substring(index - 2, index) === '//';
+  }
+
+  function parseFile ( filename, rootname ) {
+    if ( _included[filename] ) return '';
+    _included[filename] = true;
+    return efe.readFileSync(filename).toString()
+      .replace(/@import\s*?("|')(.*)("|')/g, function(m, openOp, request, closeOp, index, content){
+        if ( commentedOut(index, content) ) return m;
+        if ( openOp !== closeOp ) {
+          throw new SyntaxError('import statement in "' + filename + '" at ' + index + ' has mismatched opening and closing characters.');
+        }
+        var path = efe.join(rootname, request), data = "", isDirectory = false;
+        if ( efe.isDirectorySync(path) ) {
+          path = efe.join(path, 'index.pegjs');
+          isDirectory = !efe.existsSync(path);
+        }
+        if ( isDirectory ) {
+          path = efe.join(rootname, request);
+          efe.walkSync(path, function(filename, stat){
+            data += createOutput(filename, parseFile(filename, stat.dirname)) + "\n";
+          });
+        } else {
+          data = parseFile(path, efe.dirname(path));
+        }
+        return createOutput(path, data.trim());
+      });
+  }
+
+  return parseFile(input, efe.dirname(input));
+}
+
+var parser = preprocess(efe.join(SRC_DIR, './parser/start.pegjs'));
+efe.writeFileSync(efe.join(SRC_DIR, './parser.pegjs'), parser);
+
+if ( process.argv.indexOf('--pegjsOnly') === -1 ) {
+  
+  var separator = ": ";
+
+  try {
+    parser = "module.exports = " + PEG.buildParser(parser, { output: "source" }) + ";" + EOL;
+  } catch ( e ) {
+    if ( typeof e.line === 'number' ) {
+      separator = " @ " + e.line + ":" + e.column + ") ";
+    }
+    console.error(EOL + e.name + separator + e.message + EOL);
+    process.exit(1);
+  }
+  
+  efe.writeFileSync(efe.join(__dirname, '../lib/parser.js'), parser);
+  
+}
