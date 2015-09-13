@@ -1,5 +1,10 @@
 Identifier
-  = $(IdentifierStart IdentifierPart*)
+  = !Keyword name:IdentifierName { return name; }
+
+IdentifierName "identifier"
+  = identifier:$(IdentifierStart IdentifierPart*) {
+      return append({ type: 'identifier', value: identifier });
+    }
 
 IdentifierStart
   = AlphaCharacter

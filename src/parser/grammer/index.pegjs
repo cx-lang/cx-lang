@@ -6,4 +6,8 @@
 
 @import "identifier.pegjs"
 
+@import "tokens.pegjs"
+
+@import "keywords.pegjs"
+
 @import "skipped.pegjs"
