@@ -45,10 +45,15 @@ function preprocess ( input ) {
         if ( openOp !== closeOp ) {
           throw new SyntaxError('import statement in "' + filename + '" at ' + index + ' has mismatched opening and closing characters.');
         }
+        request = request.replace(/\\/g, '/');
         var path = efe.join(rootname, request), data = "", isDirectory = false;
         if ( efe.isDirectorySync(path) ) {
           path = efe.join(path, 'index.pegjs');
           isDirectory = !efe.existsSync(path);
+          if ( isDirectory ) {
+            path = efe.join(rootname, request, request.split('/').slice(-1)[0] + '.pegjs');
+            isDirectory = !efe.existsSync(path);
+          }
         }
         if ( isDirectory ) {
           path = efe.join(rootname, request);
