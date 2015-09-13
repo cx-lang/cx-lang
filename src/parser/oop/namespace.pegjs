@@ -6,3 +6,4 @@ NamespaceElements
 NamespaceElement
   = Identifier
   / DecimalDigit
+  / Literal

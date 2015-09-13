@@ -2,14 +2,15 @@
 
 var __CX_API__ = 0;
   
-var loc = function ( ast ) { return ast; };
+var append = function ( ast ) { return ast; };
 if ( options.loc ) {
   if ( typeof options.loc === 'function' ) {
-    loc = function ( ast ) {
-      return options.loc(ast, peg$savedPos, peg$currPos);
+    append = function ( ast ) {
+      ast.loc = options.loc(ast, peg$savedPos, peg$currPos);
+      return ast;
     };
   } else {
-    loc = function ( ast ) {
+    append = function ( ast ) {
       var position = location();
       ast.loc = {
         filename: options.filename,
