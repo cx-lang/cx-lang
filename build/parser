@@ -75,13 +75,16 @@ efe.writeFileSync(efe.join(SRC_DIR, './parser.pegjs'), parser);
 
 if ( process.argv.indexOf('--pegjsOnly') === -1 ) {
   
-  var separator = ": ";
+  var separator = ": ", location;
 
   try {
     parser = "module.exports = " + PEG.buildParser(parser, { output: "source" }) + ";" + EOL;
   } catch ( e ) {
     if ( typeof e.line === 'number' ) {
       separator = " @ " + e.line + ":" + e.column + ") ";
+    } else if ( e.location && e.location.start ) {
+      location = e.location.start;
+      separator = " @ " + location.line + ":" + location.column + ") ";
     }
     console.error(EOL + e.name + separator + e.message + EOL);
     process.exit(1);
