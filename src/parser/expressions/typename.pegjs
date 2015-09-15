@@ -1,0 +1,4 @@
+TypeName
+  = Variable
+  / Pathname
+  / GenericName
