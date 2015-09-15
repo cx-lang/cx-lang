@@ -20,3 +20,5 @@ BooleanLiteral
 @import "strings.pegjs"
 
 @import "regexps.pegjs"
+
+@import "context.pegjs"
