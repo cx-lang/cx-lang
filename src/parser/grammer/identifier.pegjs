@@ -1,9 +1,14 @@
-Identifier
-  = !Keyword name:IdentifierName { return name; }
+Variable
+  = !Keyword name:Identifier {
+      return append({ type: 'variable', value: identifier });
+    }
 
-IdentifierName "identifier"
-  = identifier:$(IdentifierStart IdentifierPart*) {
-      return append({ type: 'identifier', value: identifier });
+Identifier "identifier"
+  = $(IdentifierStart IdentifierPart*)
+
+Pathname
+  = first:Variable rest:(__ "." __ Identifier)+ {
+      return buildList(first, rest, 3);
     }
 
 IdentifierStart
