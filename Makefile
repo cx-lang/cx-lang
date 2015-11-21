@@ -5,6 +5,9 @@ build: clean parser lib dist
 parser:
 	node build/parser
 
+pegjs:
+	node build/parser --pegjsOnly
+
 lib:
 	node build/lib
 
@@ -17,5 +20,5 @@ test:
 clean:
 	node build/clean
 
-.PHONY:  build parser lib dist test clean
-.SILENT: build parser lib dist test clean
+.PHONY:  build parser pegjs lib dist test clean
+.SILENT: build parser pegjs lib dist test clean

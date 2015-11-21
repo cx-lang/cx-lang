@@ -1,1 +1,74 @@
 #!/usr/bin/env node
+require('./utils/globals');
+const PEG = require('pegjs');
+
+function preprocess ( input ) {
+  const _included = [];
+
+  function createOutput ( filename, data ) {
+    var content = "";
+    if ( data.trim() !== '' ) {
+      content += "// @source: " + filename.replace(SRC_DIR, '.').replace(/\\/g, '/') + "\n\n" + indent(data);
+    }
+    return content;
+  }
+
+  function commentedOut ( index, content ) {
+    while ( (/( |\t)/).test(content.charAt(index - 1)) ) --index;
+    return content.substring(index - 2, index) === '//';
+  }
+
+  function parseFile ( filename, rootname ) {
+    if ( filename in _included ) return '';
+    _included[filename] = true;
+    return readFile(filename).replace(
+      /@import\s*?("|')(.*)("|')/g, function(m, openOp, request, closeOp, index, content){
+        if ( commentedOut(index, content) ) return m;
+        if ( openOp !== closeOp ) {
+          throw new SyntaxError('import statement in "' + filename + '" at ' + index + ' has mismatched opening and closing characters.');
+        }
+        request = request.replace(/\\/g, '/');
+        var path = resolve(rootname, request), data = "", isDirectory = lstat(path).isDirectory();
+        if ( isDirectory ) {
+          path = resolve(path, 'index.pegjs');
+          isDirectory = !exists(path);
+        }
+        if ( isDirectory ) {
+          path = resolve(rootname, request);
+          walk(path, function(filename, stat){
+            data += createOutput(filename, parseFile(filename, stat.dirname)) + "\n";
+          });
+        } else {
+          data = parseFile(path, dirname(path));
+        }
+        return createOutput(path, data.trim());
+      }
+    );
+  }
+
+  return parseFile(input, dirname(input));
+}
+
+var parser = preprocess(resolve(SRC_DIR, 'parser/start.pegjs'));
+writeFile(resolve(SRC_DIR, 'lib/parser.pegjs'), parser);
+
+if ( process.argv.indexOf('--pegjsOnly') === -1 ) {
+  
+  var separator = ": ", location;
+
+  try {
+    parser = "module.exports = " + PEG.buildParser(parser, { output: "source" }) + ";" + EOL;
+  } catch ( e ) {
+    if ( typeof e.line === 'number' ) {
+      separator = " @ " + e.line + ":" + e.column + ") ";
+    } else if ( e.location && e.location.start ) {
+      location = e.location.start;
+      separator = " @ " + location.line + ":" + location.column + ") ";
+    }
+    console.error(EOL + e.name + separator + e.message + EOL);
+    process.exit(1);
+  }
+  
+  writeFile(resolve(SRC_DIR, 'lib/parser.js'), parser);
+  
+}
