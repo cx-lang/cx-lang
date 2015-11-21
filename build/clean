@@ -1,1 +1,10 @@
 #!/usr/bin/env node
+require('./utils/globals');
+
+[
+  
+  resolve(SRC_DIR, 'lib/parser.pegjs'),
+  resolve(SRC_DIR, 'lib/parser.js')
+
+]
+.forEach(require('fs-extra').removeSync);
