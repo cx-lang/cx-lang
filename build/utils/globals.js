@@ -1,7 +1,6 @@
 const FS = require('fs-extra');
 const PATH = require('path');
 
-global.debug = require('debug')('cx-lang');
 global.EOL = require('os').EOL;
 global.basename = PATH.basename;
 global.dirname = PATH.dirname;
