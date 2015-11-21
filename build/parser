@@ -65,8 +65,7 @@ if ( process.argv.indexOf('--pegjsOnly') === -1 ) {
       location = e.location.start;
       separator = " @ " + location.line + ":" + location.column + ") ";
     }
-    console.error(EOL + e.name + separator + e.message + EOL);
-    process.exit(1);
+    exit(EOL + e.name + separator + e.message + EOL);
   }
   
   writeFile(resolve(SRC_DIR, 'lib/parser.js'), parser);

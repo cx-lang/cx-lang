@@ -13,6 +13,13 @@ global.DIST_DIR = resolve(MODULE_DIR, 'dist');
 global.LIB_DIR = resolve(MODULE_DIR, 'lib');
 global.SRC_DIR = resolve(MODULE_DIR, 'src');
 
+global.exit = function ( ) {
+  if ( arguments.length ) {
+    console.error.apply(null, arguments);
+    process.exit(1);
+  }
+  process.exit();
+};
 
 global.exists = function ( path ) {
   try {
