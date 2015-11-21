@@ -4,7 +4,8 @@ require('./utils/globals');
 [
   
   resolve(SRC_DIR, 'lib/parser.pegjs'),
-  resolve(SRC_DIR, 'lib/parser.js')
+  resolve(SRC_DIR, 'lib/parser.js'),
+  LIB_DIR
 
 ]
 .forEach(require('fs-extra').removeSync);
