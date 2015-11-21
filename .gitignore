@@ -1,0 +1,6 @@
+/dist
+/lib
+/src/lib/parser.pegjs
+/*.log
+/node_modules
+output/*
