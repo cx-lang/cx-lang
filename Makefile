@@ -1,24 +1,18 @@
+PEGJS = ${CURDIR}/node_modules/.bin/pegjs
 MOCHA = ${CURDIR}/node_modules/.bin/mocha
 
-build: clean parser lib dist
+PARSER_OUTPUT  = lib/parser.js
+
+build: parser
 
 parser:
-	node build/parser
-
-pegjs:
-	node build/parser --pegjsOnly
-
-lib:
-	node build/lib
-
-dist:
-	node build/dist
+	$(PEGJS) src/parser.pegjs $(PARSER_OUTPUT)
 
 test:
 	$(MOCHA)
 
 clean:
-	node build/clean
+	rm -f $(PARSER_OUTPUT)
 
-.PHONY:  build parser pegjs lib dist test clean
-.SILENT: build parser pegjs lib dist test clean
+.PHONY:  build parser test clean
+.SILENT: build parser test clean
