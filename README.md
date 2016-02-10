@@ -34,5 +34,5 @@ Links
 
 License
 -------
-Copyright (c) 2014-2015 Futago-za Ryuu, Erispa<br>
+Copyright (c) 2014-2016 Futago-za Ryuu, Erispa<br>
 The MIT License, [http://opensource.org/licenses/MIT](http://opensource.org/licenses/MIT)
