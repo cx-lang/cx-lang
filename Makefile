@@ -1,4 +1,4 @@
-PEGJS = ${CURDIR}/node_modules/.bin/pegjs
+PEGJS = ${CURDIR}/node_modules/.bin/pegjs-dev
 MOCHA = ${CURDIR}/node_modules/.bin/mocha
 
 PARSER_OUTPUT  = lib/parser.js
