@@ -1,18 +1,26 @@
 PEGJS = ${CURDIR}/node_modules/.bin/pegjs-dev
 MOCHA = ${CURDIR}/node_modules/.bin/mocha
 
-PARSER_OUTPUT  = lib/parser.js
+PARSER_SRC = src/parser.pegjs
+MAIN_PARSER = lib/main-parser.js
+ALT_PARSER = lib/alt-parser.js
 
-build: parser
+all: clean build test
+
+build: parser alt-parser
 
 parser:
-	$(PEGJS) src/parser.pegjs $(PARSER_OUTPUT)
+	$(PEGJS) $(PARSER_SRC) $(MAIN_PARSER)
+
+alt-parser:
+	$(PEGJS) --cache $(PARSER_SRC) $(ALT_PARSER)
 
 test:
 	$(MOCHA)
 
 clean:
-	rm -f $(PARSER_OUTPUT)
+	rm -f $(MAIN_PARSER)
+	rm -f $(ALT_PARSER)
 
-.PHONY:  build parser test clean
-.SILENT: build parser test clean
+.PHONY:  all build parser alt-parser test clean
+.SILENT: all build parser alt-parser test clean
