@@ -1,5 +1,6 @@
 PEGJS = ${CURDIR}/node_modules/.bin/pegjs-dev
 MOCHA = ${CURDIR}/node_modules/.bin/mocha
+ESLINT = ${CURDIR}/node_modules/.bin/eslint
 
 PARSER_SRC = src/parser.pegjs
 MAIN_PARSER = lib/main-parser.js
@@ -18,9 +19,12 @@ alt-parser:
 test:
 	$(MOCHA)
 
+lint:
+	$(ESLINT) --cache .
+
 clean:
 	rm -f $(MAIN_PARSER)
 	rm -f $(ALT_PARSER)
 
-.PHONY:  all build parser alt-parser test clean
-.SILENT: all build parser alt-parser test clean
+.PHONY:  all build parser alt-parser test lint clean
+.SILENT: all build parser alt-parser test lint clean

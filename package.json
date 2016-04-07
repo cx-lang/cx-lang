@@ -24,7 +24,7 @@
     "cx-lang": "bin/cx-lang"
   },
   "scripts": {
-    "test": "make test"
+    "test": "make lint && make test"
   },
   "repository": {
     "type": "git",
@@ -38,9 +38,19 @@
   },
   "devDependencies": {
     "pegjs-dev": "0.9.60",
-    "mocha": "2.4.5"
+    "mocha": "2.4.5",
+    "eslint": "2.4.0"
   },
   "engines": {
     "node": ">= 4.0.0"
+  },
+
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "root": true,
+    "env": {
+      "node": true,
+      "es6": true
+    }
   }
 }
