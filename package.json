@@ -34,10 +34,10 @@
     "url": "https://github.com/cx-lang/cx-lang/issues"
   },
   "dependencies": {
-    "fs-extra": "0.26.5"
+    "fs-extra": "0.26.7"
   },
   "devDependencies": {
-    "pegjs-dev": "0.9.44",
+    "pegjs-dev": "0.9.60",
     "mocha": "2.4.5"
   },
   "engines": {
