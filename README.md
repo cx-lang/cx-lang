@@ -1,14 +1,14 @@
-This is a programming language that can optionally transpile to any language you define.
-It is based on C++, C#, TypeScript, JavaScript, HTML/CSS and HaXe.
+CXLang is a statically typed programming language that has borrowed it's syntax from dynamic languages, and can transpile to any language you define.
 
-Version
--------
-- Roadmap: alpha<br>
-- Development: 0.0.3-Vostok<br>
-- Release:     0.0.1
+## Version
 
-Install
--------
+- Development: [0.5.0](https://github.com/cx-lang/cx-lang/tree/v0.5)<br>
+- Release:     [0.0.1]([https://www.npmjs.com/package/cx-lang)
+
+I originally started work on this computer language sometime in 2013/2014, but as there have been so many rewrites of the the parser and compiler, it's ridicules to set a version based on that alone. So considering that I started working on parsers and compilers in 2011, and that this project has yet to reach v1, I decided that starting its official version from v0.5 is justified.
+
+## Install
+
 ###### NPM:
   
   ```shell
@@ -24,9 +24,8 @@ Install
   make build
   ```
 
-Links
------
-  
+## Links
+
   Homepage: [https://cx-lang.github.io/](https://cx-lang.github.io/)<br>
   Wiki: [https://github.com/cx-lang/cx-lang/wiki](https://github.com/cx-lang/cx-lang/wiki)<br>
   Issues: [https://github.com/cx-lang/cx-lang/issues](https://github.com/cx-lang/cx-lang/issues)<br>
@@ -34,5 +33,5 @@ Links
 
 License
 -------
-Copyright (c) 2014-2016 Futago-za Ryuu, Erispa<br>
+Copyright (c) 2011-2016 Futago-za Ryuu, Erispa<br>
 The MIT License, [http://opensource.org/licenses/MIT](http://opensource.org/licenses/MIT)
