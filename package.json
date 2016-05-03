@@ -1,6 +1,6 @@
 {
   "name": "cx-lang",
-  "version": "0.0.3-Vostok",
+  "version": "0.5.0",
   "description": "The statically typed dynamic language.",
   "keywords": [
     "cx",
@@ -10,7 +10,10 @@
     "transpiler",
     "ast",
     "jit",
-    "vm"
+    "vm",
+    "javascript",
+    "c++",
+    "cpp"
   ],
   "homepage": "https://cx-lang.github.io/",
   "author": {
@@ -19,7 +22,7 @@
     "url": "https://futagoza.github.io/"
   },
   "license": "MIT",
-  "main": "lib/cx-lang.js",
+  "main": "index.js",
   "bin": {
     "cx-lang": "bin/cx-lang"
   },
@@ -34,15 +37,14 @@
     "url": "https://github.com/cx-lang/cx-lang/issues"
   },
   "dependencies": {
-    "fs-extra": "0.26.7"
+    "fs-extra": "0.30.0"
   },
   "devDependencies": {
-    "pegjs-dev": "0.9.60",
     "mocha": "2.4.5",
     "eslint": "2.4.0"
   },
   "engines": {
-    "node": ">= 4.0.0"
+    "node": ">= 6.0.0"
   },
 
   "eslintConfig": {
