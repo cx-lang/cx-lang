@@ -1,6 +1,0 @@
-{
-  "rules": {
-    "no-unused-vars": 0,
-    "no-func-assign": 0
-  }
-}
