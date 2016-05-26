@@ -40,8 +40,8 @@
     "fs-extra": "0.30.0"
   },
   "devDependencies": {
-    "mocha": "2.4.5",
-    "eslint": "2.4.0"
+    "mocha": "2.5.3",
+    "eslint": "2.10.2"
   },
   "engines": {
     "node": ">= 6.0.0"
