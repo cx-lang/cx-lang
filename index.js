@@ -1,1 +1,3 @@
-modules.exports = require('./src/cx-lang');
+'use strict';
+
+modules.exports = require('./lib/cx-lang');
