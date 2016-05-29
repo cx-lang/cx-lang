@@ -1,0 +1,15 @@
+{
+  "plugins": [
+    "transform-es2015-modules-commonjs",
+    "transform-async-to-generator",
+    "transform-exponentiation-operator",
+    "syntax-trailing-function-commas",
+    "transform-es2015-destructuring",
+    "transform-object-rest-spread",
+    "transform-class-properties",
+    "transform-export-extensions",
+    "transform-do-expressions",
+    "transform-strict-mode",
+    "transform-runtime"
+  ]
+}
