@@ -13,15 +13,27 @@ gulp.task('build', ['build:lib', 'build:test']);
 
 [ 'lib', 'test' ].forEach(function(folder){
 
-  var paths = ['src/' + folder + '/**/*.js'];
-
   gulp.task('clean:' + folder, function(){
-    return del(paths);
+    return del(folder);
   });
 
   gulp.task('build:' + folder, function(){
-    return gulp.src(paths)
-      .pipe(babel(require('./src/.babelrc')))
+    return gulp.src('src/' + folder + '/**/*.js')
+      .pipe(babel({
+        "plugins": [
+          "transform-es2015-modules-commonjs",
+          "transform-async-to-generator",
+          "transform-exponentiation-operator",
+          "syntax-trailing-function-commas",
+          "transform-es2015-destructuring",
+          "transform-object-rest-spread",
+          "transform-class-properties",
+          "transform-export-extensions",
+          "transform-do-expressions",
+          "transform-strict-mode",
+          "transform-runtime"
+        ]
+      }))
       .pipe(sourcemaps.write(folder))
       .pipe(gulp.dest(folder));
   });
