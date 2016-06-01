@@ -1,24 +1,24 @@
-GULP  = ${CURDIR}/node_modules/.bin/gulp
+SDK = node bin/cx-sdk
 
 rebuild: clean build
 
-clean:
-	$(GULP) clean
+clean: clean/test clean/examples clean/libcx
 
-clean-lib:
-	$(GULP) clean:lib
+clean/%:
+	@ $(SDK) $@
 
-clean-test:
-	$(GULP) clean:test
+build: build/libcx build/examples build/test
 
-build:
-	$(GULP) build
+build/%:
+	@ $(SDK) $@
 
-build-lib:
-	$(GULP) build:lib
+test: spec benchmark
 
-build-test:
-	$(GULP) build:test
+spec:
+	node test/spec
 
-.PHONY:  rebuild clean clean-lib clean-test build build-lib build-test
-.SILENT: rebuild clean clean-lib clean-test build build-lib build-test
+benchmark:
+	node test/benchmark
+
+.PHONY:  rebuild clean build test spec benchmark
+.SILENT: rebuild clean build test spec benchmark
