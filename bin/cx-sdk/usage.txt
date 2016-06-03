@@ -1,0 +1,21 @@
+
+  cx-sdk [task]/[target] [...options]
+
+  Tasks:
+
+    help / ?         Display this usage text.
+    build            Build the target, outputting trans-compiled files.
+    clean            Remove any generated files for specified target.
+
+  Targets:
+
+    libcx            Compiler, VM and Services
+    examples         Example modules
+    test             Specs and Benchmarks
+
+  Options:
+
+    -s, --silent     Execute task without displaying messages or errors.
+    --verbose        If any, display more messages during execution of task.
+    --src            Set a custom source directory. Defaults to $(CXLANG)/src
+    --output         Set output directory for target, Defaults to $(CWD)
