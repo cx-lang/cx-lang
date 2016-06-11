@@ -38,17 +38,17 @@
   },
   "dependencies": {
     "fs-extra": "0.30.0",
-    "babel-runtime": "6.9.0"
+    "babel-runtime": "6.9.2"
   },
   "devDependencies": {
-    "babel-core": "6.9.0",
+    "babel-core": "6.9.1",
     "babel-plugin-transform-es2015-modules-commonjs": "6.8.0",
     "babel-plugin-transform-async-to-generator": "6.8.0",
     "babel-plugin-transform-exponentiation-operator": "6.8.0",
     "babel-plugin-syntax-trailing-function-commas": "6.8.0",
     "babel-plugin-transform-es2015-destructuring": "6.9.0",
     "babel-plugin-transform-object-rest-spread": "6.8.0",
-    "babel-plugin-transform-class-properties": "6.9.0",
+    "babel-plugin-transform-class-properties": "6.9.1",
     "babel-plugin-transform-export-extensions": "6.8.0",
     "babel-plugin-transform-do-expressions": "6.8.0",
     "babel-plugin-transform-strict-mode": "6.8.0",
