@@ -22,8 +22,8 @@
   "main": "index.js",
   "module": "index.es.js",
   "bin": {
-    "cx-lang": "Bin/cx-lang",
-    "libcx": "Bin/libcx"
+    "cx-lang": "compiler.js",
+    "libcx": "package-manager.js"
   },
   "scripts": {
     "test": "make test"

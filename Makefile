@@ -1,5 +1,5 @@
 NODE_MODULES = ${CURDIR}/node_modules
-SDK_DIR      = ${CURDIR}/sdk
+SDK_DIR      = ${CURDIR}/SDK
 BIN_DIR      = $(NODE_MODULES)/.bin
 
 COMMITHASH_FILE = .commithash
@@ -12,7 +12,7 @@ target-%: commithash
 	@ node $(SDK_DIR)/bundle $@
 
 lint:
-	$(BIN_DIR)/eslint -c $(ESLINT_CONFIG) Bin SDK Source
+	$(BIN_DIR)/eslint -c $(ESLINT_CONFIG) SDK Source
 
 test:
 	node $(SDK_DIR)/specRunner
