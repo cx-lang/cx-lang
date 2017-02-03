@@ -1,24 +1,24 @@
-SDK = node bin/cx-sdk
+NODE_MODULES = ${CURDIR}/node_modules
+SDK_DIR      = ${CURDIR}/sdk
+BIN_DIR      = $(NODE_MODULES)/.bin
 
-rebuild: clean build
+COMMITHASH_FILE = .commithash
+ESLINT_CONFIG   = $(SDK_DIR)/eslintrc.js
 
-clean: clean/test clean/examples clean/libcx
+commithash:
+	git rev-parse HEAD > $(COMMITHASH_FILE)
 
-clean/%:
-	@ $(SDK) $@
+target-%: commithash
+	@ node $(SDK_DIR)/bundle $@
 
-build: build/libcx build/examples build/test
+lint:
+	$(BIN_DIR)/eslint -c $(ESLINT_CONFIG) Bin SDK Source
 
-build/%:
-	@ $(SDK) $@
+test:
+	node $(SDK_DIR)/specRunner
 
-test: spec benchmark
+clean:
+	$(BIN_DIR)/rimraf $(COMMITHASH_FILE) *.js
 
-spec:
-	node test/spec
-
-benchmark:
-	node test/benchmark
-
-.PHONY:  rebuild clean build test spec benchmark
-.SILENT: rebuild clean build test spec benchmark
+.PHONY:  commithash lint test clean
+.SILENT: commithash lint test clean
