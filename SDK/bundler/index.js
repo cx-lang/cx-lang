@@ -1,7 +1,7 @@
 'use strict'
 
 const { existsSync } = require( 'fs' )
-const { join } = require( 'path' )
+const { join, sep } = require( 'path' )
 const { rollup } = require( 'rollup' )
 const babel = require( 'rollup-plugin-babel' )
 const pegjs = require( './plugins/pegjs' )
@@ -10,13 +10,14 @@ const replace = require( 'rollup-plugin-replace' )
 const resolver = require( './plugins/resolver' )
 
 const die = require( './util/die' )
-const { version } = require( './util/package' )
+const optionalConfig = require( './util/optionalConfig' )
 const optionalFile = require( './util/optionalFile' )
-const optionalRequire = require( './util/optionalRequire' )
 const external = require( './util/external' )
-const TARGET = require( './util/target' )
 
-const config = optionalRequire( `Source/${ TARGET }/.projectrc` )
+const TARGET = require( './util/target' )
+const srcdir = join( process.cwd(), 'Source', TARGET )
+const config = optionalConfig( srcdir + sep + '.projectrc' )
+const meta = optionalConfig( 'package.json' )
 
 let banner = config.banner || optionalFile( 'Source/banner.js' )
 const sourceMap = config.sourceMap === true
@@ -26,7 +27,7 @@ const constants = Object.assign(
     '$$BUILDTIME': new Date(),
     '$$COMMITHASH': optionalFile( '.commithash', 'unknown' ).trim(),
     '$$TARGET': TARGET,
-    '$$VERSION': version
+    '$$VERSION': meta.version
   },
   config.constants || {}
 )

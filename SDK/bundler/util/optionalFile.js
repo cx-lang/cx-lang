@@ -2,7 +2,7 @@
 
 const { existsSync, readFileSync } = require( 'fs' )
 
-function optionalFile( filename, alternativeContent ) {
+function optionalFile( filename, alternativeContent = '' ) {
 
   if ( existsSync( filename ) ) {
 
@@ -10,7 +10,7 @@ function optionalFile( filename, alternativeContent ) {
 
   }
 
-  return alternativeContent || ''
+  return alternativeContent
 
 }
 

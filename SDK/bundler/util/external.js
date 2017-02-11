@@ -1,6 +1,6 @@
 'use strict'
 
-const meta = require( './package' )
+const meta = require( './optionalConfig' )( 'package.json' )
 
 const list = []
 const map = {}
