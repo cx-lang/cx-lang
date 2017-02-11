@@ -1,4 +1,5 @@
 /Examples/**/output
 /node_modules
+/.commithash
 /*.js
 /npm-debug.log
