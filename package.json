@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "pegjs-dev": "0.10.0-103",
-    "eslint": "3.14.1",
+    "eslint": "3.15.0",
     "eslint-config-mdcs": "4.2.2",
     "rollup": "0.41.4",
     "rollup-pluginutils": "2.0.1",
