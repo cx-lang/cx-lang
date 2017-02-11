@@ -16,7 +16,7 @@ module.exports = {
 
     // Possible Errors
 
-    'no-cond-assign': [ 'error', 'always' ],
+    'no-cond-assign': [ 2, 'always' ],
     'no-debugger': 'error',
     'no-dupe-args': 'error',
     'no-dupe-keys': 'error',
