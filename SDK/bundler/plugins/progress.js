@@ -75,9 +75,12 @@ module.exports = function progress( options = {} ) {
 
     },
 
-    ongenerate() {
+    ongenerate( { dest, format } ) {
 
-      print( `Bundled ${ green( filesLoaded ) } files.` )
+      const filename = `Created '${ dest }', a ${ format } module,`
+      const stats = `using ${ green( filesLoaded ) } files.`
+
+      print( filename + ' ' + stats )
 
     }
 
