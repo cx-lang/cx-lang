@@ -25,6 +25,8 @@ class ExpectationError extends Error {
 
   constructor( actual, expected, message ) {
 
+    super()
+
     this.name = 'ExpectationError'
 
     if ( arguments.length === 1 ) {
@@ -39,11 +41,13 @@ class ExpectationError extends Error {
 
     }
 
-    if ( Error.captureStackTrace ) {
+    if ( typeof Error.captureStackTrace === 'function' )
 
       Error.captureStackTrace( this, equal )
 
-    }
+    else
+
+      this.stack = ( new Error() ).stack
 
   }
 

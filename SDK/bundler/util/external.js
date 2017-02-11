@@ -1,6 +1,7 @@
 'use strict'
 
 const meta = require( './optionalConfig' )( 'package.json' )
+const __hasOwnProperty = Object.prototype.hasOwnProperty
 
 const list = []
 const map = {}
@@ -11,7 +12,7 @@ function add( externals ) {
 
   for ( const external in externals ) {
 
-    if ( ! externals.hasOwnProperty( external ) ) continue
+    if ( ! __hasOwnProperty.call( externals, external ) ) continue
 
     list[ index++ ] = external
     map[ external ] = true

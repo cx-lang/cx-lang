@@ -6,7 +6,7 @@ const { createFilter } = require( 'rollup-pluginutils' )
 module.exports = function createPlugin( options = {} ) {
 
   const target = options.target || 'es6'
-  const include = options.include || ['*.pegjs', '**/*.pegjs']
+  const include = options.include || [ '*.pegjs', '**/*.pegjs' ]
   const exclude = options.exclude
   options.output = 'source'
 

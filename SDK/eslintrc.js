@@ -75,7 +75,7 @@ module.exports = {
     'prefer-rest-params': 'error',
     'prefer-spread': 'error',
     'symbol-description': 'error',
-    'template-curly-spacing': ['error', 'always']
+    'template-curly-spacing': [ 'error', 'always' ]
 
   }
 

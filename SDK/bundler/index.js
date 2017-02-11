@@ -20,7 +20,7 @@ const config = optionalConfig( srcdir + sep + '.projectrc' )
 const meta = optionalConfig( 'package.json' )
 
 let banner = config.banner || optionalFile( 'Source/banner.js' )
-const sourceMap = config.sourceMap === true
+let sourceMap = config.sourceMap === true
 
 const constants = Object.assign(
   {

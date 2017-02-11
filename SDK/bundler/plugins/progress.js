@@ -13,7 +13,7 @@ function normalizePath( id ) {
 
 }
 
-function print ( output ) {
+function print( output ) {
 
   if ( print.clearLine ) {
 

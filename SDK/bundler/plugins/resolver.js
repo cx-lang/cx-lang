@@ -27,7 +27,7 @@ module.exports = function createPlugin( options = {} ) {
   const { root, paths, include, exclude, external = {} } = options
 
   const filter = createFilter( include, exclude )
-  
+
   const otherPaths
     = Array.isArray( paths ) ? paths
     : typeof paths === 'string' ? [ paths ] : []
@@ -43,7 +43,7 @@ module.exports = function createPlugin( options = {} ) {
       if ( external[ importee ] ) return null
 
       let id = importee.replace( '\\', '/' )
-      let searchPaths = []
+      const searchPaths = []
       let startsWith = id.charAt( 0 )
 
       if ( startsWith === '/' ) {
@@ -61,10 +61,10 @@ module.exports = function createPlugin( options = {} ) {
 
         if ( root ) searchPaths.push( join( root, id ) )
 
-        for ( let path of otherPaths ) {
+        for ( const path of otherPaths ) {
 
           if ( root ) searchPaths.push( join( root, path, id ) )
-          
+
           searchPaths.push( join( path, id ) )
 
         }
