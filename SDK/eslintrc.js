@@ -73,7 +73,7 @@ module.exports = {
     'prefer-const': 'error',
     'prefer-numeric-literals': 'error',
     'prefer-rest-params': 'error',
-    'prefer-spread': 'error',
+    'prefer-spread': 0,
     'symbol-description': 'error',
     'template-curly-spacing': [ 'error', 'always' ]
 
