@@ -9,7 +9,7 @@ commithash:
 	git rev-parse HEAD > $(COMMITHASH_FILE)
 
 target-%: commithash
-	@ node $(SDK_DIR)/bundler $@
+	@ node $(SDK_DIR)/bundler $(subst target-,TARGET:,$@)
 
 lint:
 	$(BIN_DIR)/eslint -c $(ESLINT_CONFIG) SDK Source

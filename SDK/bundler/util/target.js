@@ -3,7 +3,7 @@
 const { existsSync } = require( 'fs' )
 const die = require( './die' )
 
-const TARGET_PREFIX = 'target-'
+const TARGET_PREFIX = 'TARGET:'
 let name = false
 
 for ( const arg of process.argv ) {
