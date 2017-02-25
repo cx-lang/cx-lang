@@ -6,6 +6,8 @@ module.exports = {
 
   plugins: [
 
+    'transform-async-to-module-method',
+
     'transform-class-properties',
 
     'transform-export-extensions',

@@ -13,12 +13,10 @@
     "c++",
     "cpp"
   ],
-  "homepage": "https://github.com/cx-lang/cx-lang/",
   "repository": "cx-lang/cx-lang",
   "bugs": "https://github.com/cx-lang/cx-lang/issues",
   "license": "MIT",
   "author": "Futago-za Ryuu <futagoza.ryuu@gmail.com>",
-
   "main": "index.js",
   "module": "index.es.js",
   "bin": {
@@ -32,19 +30,20 @@
     "bluebird": "3.4.7",
     "mz": "2.6.0",
     "mkdirp": "0.5.1",
-    "rimraf": "2.5.4",
+    "rimraf": "2.6.0",
     "minimatch": "3.0.3",
     "globby": "6.1.0",
     "chalk": "1.1.3"
   },
   "devDependencies": {
     "pegjs-dev": "0.10.0-103",
-    "eslint": "3.15.0",
+    "eslint": "3.16.1",
     "eslint-config-mdcs": "4.2.2",
     "rollup": "0.41.4",
     "rollup-pluginutils": "2.0.1",
     "rollup-plugin-replace": "1.1.1",
     "rollup-plugin-babel": "2.7.1",
+    "babel-plugin-transform-async-to-module-method": "6.22.0",
     "babel-plugin-transform-class-properties": "6.23.0",
     "babel-plugin-transform-export-extensions": "6.22.0",
     "babel-plugin-transform-object-rest-spread": "6.23.0",
