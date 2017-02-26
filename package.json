@@ -30,7 +30,7 @@
     "bluebird": "3.4.7",
     "mz": "2.6.0",
     "mkdirp": "0.5.1",
-    "rimraf": "2.6.0",
+    "rimraf": "2.6.1",
     "minimatch": "3.0.3",
     "globby": "6.1.0",
     "chalk": "1.1.3"
