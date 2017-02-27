@@ -24,7 +24,13 @@
     "libcx": "package-manager.js"
   },
   "scripts": {
-    "test": "make test"
+    "build:commithash": "make commithash",
+    "build:node-lib": "make target/node-lib",
+    "build:compiler": "make target/compiler",
+    "build:package-manager": "make target/package-manager",
+    "clean": "make clean",
+    "lint": "eslint -c SDK/eslintrc.js SDK Source",
+    "test": "node SDK/specRunner"
   },
   "dependencies": {
     "bluebird": "3.4.7",
