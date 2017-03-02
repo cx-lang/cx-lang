@@ -20,14 +20,18 @@
   "main": "index.js",
   "module": "index.es.js",
   "bin": {
-    "cx-lang": "compiler.js",
-    "libcx": "package-manager.js"
+    "codex": "codex.js",
+    "libcx": "libcx.js"
   },
   "scripts": {
     "build:commithash": "make commithash",
-    "build:node-lib": "make target/node-lib",
-    "build:compiler": "make target/compiler",
-    "build:package-manager": "make target/package-manager",
+    "build:language": "make target/language",
+    "build:yaml": "make target/yaml",
+    "build:bytecode": "make target/bytecode",
+    "build:cx-lang": "make target/cx-lang",
+    "build:node-api": "make target/codex",
+    "build:codex": "make target/codex",
+    "build:libcx": "make target/libcx",
     "clean": "make clean",
     "lint": "eslint -c SDK/eslintrc.js SDK Source",
     "test": "node SDK/specRunner"
