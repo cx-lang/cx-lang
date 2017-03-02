@@ -29,7 +29,6 @@
     "build:yaml": "make target/yaml",
     "build:bytecode": "make target/bytecode",
     "build:cx-lang": "make target/cx-lang",
-    "build:node-api": "make target/codex",
     "build:codex": "make target/codex",
     "build:libcx": "make target/libcx",
     "clean": "make clean",
