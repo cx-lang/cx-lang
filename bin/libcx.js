@@ -6,7 +6,6 @@ const minimist = require( 'minimist' )
 const cxlang = require( '../' )
 const { join, lstat } = cxlang.require( 'file-system' )
 const { die } = cxlang.require( 'utils/console' )
-const own = cxlang.require( 'utils/own' )
 const libcx = cxlang.require( 'package-manager' )
 
 const argv = process.argv.slice( 2 )
@@ -14,7 +13,7 @@ const cwd = process.cwd()
 
 lstat( join( cwd, 'package.json' ) )
 
-  .then( function run({ exists, isFile, path }) {
+  .then( function run( { exists, isFile, path } ) {
 
     if ( ! exists() || ! isFile() )
 

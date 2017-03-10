@@ -20,7 +20,7 @@ const patterns = [ '**/*.pegjs', '**/*.util.js' ]
 
 const options = {
 
-  allowedStartRules: [ 'start' ]
+  allowedStartRules: [ 'start' ],
   cache: false,
   format: 'commonjs',
   optimize: 'speed',
@@ -44,7 +44,7 @@ function rewriteLocations( node, filename ) {
   if ( node.location ) node.location.filename = filename
 
   const children = node[ parentTypes[ node.type ] ]
-  
+
   if ( children )
 
     children.forEach( child => rewriteLocations( child, filename ) )
@@ -56,7 +56,7 @@ function rewriteLocations( node, filename ) {
 }
 
 const PREDEFINED_RULE = /Rule "(.*)" is already defined/
-function buildErrorMessage ( error, ast ) {
+function buildErrorMessage( error, ast ) {
 
   const { filename, start } = error.location
 
@@ -180,7 +180,7 @@ globby( patterns, { src: srcDir } )
       source = grammar.initializer ? grammar.initializer.code : false
       if ( typeof source === 'string' && source.trim().length > 0 ) {
 
-        code = code + `\n// ${ forward( id ) }\n\n${ source }\n`
+        code += `\n// ${ forward( id ) }\n\n${ source }\n`
 
       }
 
@@ -237,13 +237,13 @@ globby( patterns, { src: srcDir } )
           location: dummyLocation
         },
         rules,
-        location:  dummyLocation
+        location: dummyLocation
 
       }
 
       mkdir( pathinfo( filename ).dir )
       writeFile( filename, compile( ast ) )
-      console.log(`Generated ${ filename }`)
+      console.log( `Generated ${ filename }` )
 
     } )
 

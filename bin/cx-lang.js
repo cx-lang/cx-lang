@@ -11,7 +11,7 @@ const cwd = process.cwd()
 
 lstat( join( cwd, 'makefile.cx' ) )
 
-  .then( function run({ exists, isFile, path }) {
+  .then( function run( { exists, isFile, path } ) {
 
     if ( ! exists() || ! isFile() )
 

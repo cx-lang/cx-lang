@@ -24,7 +24,7 @@ WORKING_DIR = join( WORKING_DIR, 'lib', 'spec' )
 if ( process.argv.length > 2 ) {
 
   mochaopts = Object.assign( mochaopts, OPTIONS )
-  
+
   if ( PATHS ) {
 
     patterns = PATHS
@@ -36,9 +36,9 @@ if ( process.argv.length > 2 ) {
 
 /*--------- 3) Run tests ---------*/
 
-global.mocha = new Mocha( mochaopts )
+/* global mocha*/ global.mocha = new Mocha( mochaopts )
 
-globby( patterns, ( filename, id ) => {
+glob( patterns, ( filename, id ) => {
 
   ( id.endsWith( 'util.js' ) ? require : mocha.addFile )( filename )
 
