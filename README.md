@@ -10,14 +10,15 @@ CXLang is a statically typed programming language that has borrowed it's syntax 
 
 # version
 
-- Development: [0.6.0](https://github.com/cx-lang/cx-lang/tree/v0.6)<br>
+- Development: [v0.1-rev7](https://github.com/cx-lang/cx-lang/tree/v0.1-rev7)<br>
 - Release:     [0.0.1](https://www.npmjs.com/package/cx-lang)
 
-**erispa/cx:** 2011+ (v0.0.1)<br>
-**pre-v0.5:** 2013+ (v0.0.2+)<br>
-**v0.5:** 2016<br>
-**cx-lang/nodejs:** 2016 (v0.6-dev)<br>
-**v0.6:** 2017+
+**[erispa/cx](https://github.com/erispa/cx):** 2011+ (v0.1-rev1)<br>
+**[v0.1-rev4](https://github.com/cx-lang/cx-lang/tree/v0.1-rev4):** 2013+ (v0.1-rev2+)<br>
+**[v0.1-rev5](https://github.com/cx-lang/cx-lang/tree/v0.1-rev5):** 2016<br>
+**[cx-lang/nodejs](https://github.com/cx-lang/nodejs):** 2016 (v0.1-rev6-dev)<br>
+**[v0.1-rev6](https://github.com/cx-lang/cx-lang/tree/v0.1-rev6):** 2017<br>
+**[v0.1-rev7](https://github.com/cx-lang/cx-lang/tree/v0.1-rev7):** 2017+
 
 # install
 
