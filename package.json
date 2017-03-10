@@ -1,6 +1,6 @@
 {
   "name": "cx-lang",
-  "version": "0.6.0",
+  "version": "v0.1.0-rev7",
   "description": "A statically typed dynamic language",
   "keywords": [
     "cx",
@@ -16,48 +16,46 @@
   "repository": "cx-lang/cx-lang",
   "bugs": "https://github.com/cx-lang/cx-lang/issues",
   "license": "MIT",
-  "author": "Futago-za Ryuu <futagoza.ryuu@gmail.com>",
-  "main": "index.js",
-  "module": "index.es.js",
+  "author": "Futago-za Ryuu",
+  "files": [
+    "bin",
+    "lib"
+  ],
+  "main": "lib/cx-lang",
   "bin": {
-    "codex": "codex.js",
-    "libcx": "libcx.js"
+    "cx-lang": "bin/cx-lang",
+    "libcx": "bin/libcx"
   },
   "scripts": {
-    "build:commithash": "make commithash",
-    "build:language": "make target/language",
-    "build:yaml": "make target/yaml",
-    "build:bytecode": "make target/bytecode",
-    "build:cx-lang": "make target/cx-lang",
-    "build:codex": "make target/codex",
-    "build:libcx": "make target/libcx",
-    "clean": "make clean",
-    "lint": "eslint -c SDK/eslintrc.js SDK Source",
-    "test": "node SDK/specRunner"
+    "est": "node scripts/es-transpiler",
+    "pg": "node scripts/parser-generator",
+    "lint": "eslint --cache . bin scripts src",
+    "test": "node scripts/spec-runner",
+    "clean": "node scripts/cleaner"
   },
   "dependencies": {
-    "bluebird": "3.4.7",
+    "camelcase": "4.0.0",
+    "json5": "0.5.1",
+    "bluebird": "3.5.0",
     "mz": "2.6.0",
     "mkdirp": "0.5.1",
     "rimraf": "2.6.1",
-    "minimatch": "3.0.3",
     "globby": "6.1.0",
-    "chalk": "1.1.3"
+    "minimist": "1.2.0"
   },
   "devDependencies": {
-    "pegjs-dev": "0.10.0-103",
-    "eslint": "3.16.1",
+    "pegjs-dev": "0.10.0-117",
+    "eslint": "3.17.1",
     "eslint-config-mdcs": "4.2.2",
-    "rollup": "0.41.4",
-    "rollup-pluginutils": "2.0.1",
-    "rollup-plugin-replace": "1.1.1",
-    "rollup-plugin-babel": "2.7.1",
+    "babel-eslint": "7.1.1",
+    "babel-core": "6.23.1",
+    "babel-plugin-resolver": "1.1.0",
     "babel-plugin-transform-async-to-module-method": "6.22.0",
     "babel-plugin-transform-class-properties": "6.23.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "6.23.0",
     "babel-plugin-transform-export-extensions": "6.22.0",
     "babel-plugin-transform-object-rest-spread": "6.23.0",
-    "mocha": "3.2.0",
-    "minimist": "1.2.0"
+    "mocha": "3.2.0"
   },
   "engines": {
     "node": ">= 7.0.0"

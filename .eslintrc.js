@@ -3,12 +3,11 @@
 module.exports = {
 
   'extends': 'mdcs',
+  'parser': 'babel-eslint',
 
-  'globals': {
+  'env': {
 
-    'cxlang': true,
-    'expect': true,
-    'mocha': true
+    'node': true
 
   },
 
@@ -50,12 +49,14 @@ module.exports = {
     'operator-assignment': [ 'error', 'always' ],
     'semi': [ 'error', 'never' ],
     'space-unary-ops': [ 'error', {
+
       'words': true,
       'nonwords': false,
       'overrides': {
         '!': true,
         '!!': true
       }
+
     } ],
 
     // ES6+

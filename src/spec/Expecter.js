@@ -1,6 +1,6 @@
 'use strict'
 
-//
+//
 // Native functions.
 //
 
@@ -11,7 +11,7 @@ const __toString = Object.prototype.toString
 // Builds default Expectation error message.
 //
 
-function buildMessage( actual, expected ) {
+export function buildMessage( actual, expected ) {
 
   return `Expecting '${ expected }', returned '${ actual }'`
 
@@ -21,7 +21,7 @@ function buildMessage( actual, expected ) {
 // Expectation error.
 //
 
-class ExpectationError extends Error {
+export class ExpectationError extends Error {
 
   constructor( actual, expected, message ) {
 
@@ -57,7 +57,7 @@ class ExpectationError extends Error {
 // Strict equality ensurer, throws on fail.
 //
 
-function equal( actual, expected, message ) {
+export function equal( actual, expected, message ) {
 
   message = message || buildMessage( actual, expected )
 
@@ -71,7 +71,7 @@ function equal( actual, expected, message ) {
 // Expecter, a chain-able asserter.
 //
 
-class Expecter {
+export class Expecter {
 
   //
   // Constructors...
@@ -196,16 +196,3 @@ class Expecter {
   }
 
 }
-
-//
-// Exports.
-//
-
-Expecter.expect.equal = equal
-
-exports = module.exports = Expecter
-
-exports.buildMessage = buildMessage
-exports.ExpectationError = ExpectationError
-exports.equal = equal
-exports.Expecter = Expecter

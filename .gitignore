@@ -1,5 +1,5 @@
-/Examples/**/output
+/examples/**/output
 /node_modules
-/.commithash
-/*.js
+/lib
+/.eslintcache
 /npm-debug.log
