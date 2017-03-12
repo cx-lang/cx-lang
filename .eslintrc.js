@@ -5,12 +5,6 @@ module.exports = {
   'extends': 'mdcs',
   'parser': 'babel-eslint',
 
-  'env': {
-
-    'node': true
-
-  },
-
   'rules': {
 
     // Possible Errors
