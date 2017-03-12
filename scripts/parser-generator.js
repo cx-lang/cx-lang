@@ -164,7 +164,7 @@ globby( patterns, { src: srcDir } )
       id = id.replace( '/', SEPARATOR )
       filename = join( srcDir, id )
 
-      if ( id.endsWith( 'util.js' ) ) {
+      if ( id.endsWith( '.util.js' ) ) {
 
         dependencies.push( id )
 
