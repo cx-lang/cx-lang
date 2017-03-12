@@ -18,7 +18,7 @@ let mochaopts = {
 
 }
 
-let patterns = [ '**/*.{spec,test,util}.js' ]
+let patterns = [ '**/*.{spec,test}.js' ]
 WORKING_DIR = join( WORKING_DIR, 'lib', 'spec' )
 
 if ( process.argv.length > 2 ) {
@@ -40,7 +40,7 @@ if ( process.argv.length > 2 ) {
 
 glob( patterns, ( filename, id ) => {
 
-  ( id.endsWith( 'util.js' ) ? require : mocha.addFile )( filename )
+  ( id.endsWith( '.spec.js' ) ? require : mocha.addFile )( filename )
 
 } )
 
