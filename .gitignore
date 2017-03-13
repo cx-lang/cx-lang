@@ -1,5 +1,6 @@
 /examples/**/output
 /node_modules
 /lib
+/*.sublime-*
 /.eslintcache
 /npm-debug.log
