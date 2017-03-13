@@ -6,18 +6,22 @@
   "plugins": [
 
     [ "resolver", { "resolveDirs": [ "src" ] } ],
+    "transform-es2015-modules-commonjs",
 
+    "syntax-trailing-function-commas",
     [ "transform-async-to-module-method", {
 
         "module": "bluebird",
         "method": "coroutine"
 
-    } ],
+    } ]
 
-    "transform-es2015-modules-commonjs",
-    "transform-class-properties",
-    "transform-export-extensions",
-    "transform-object-rest-spread"
+  ],
+
+  "presets": [
+
+    "es2016",
+    "stage-0"
 
   ]
 
