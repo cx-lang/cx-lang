@@ -7,7 +7,6 @@
 require( './globalHelpers' )
 
 const { transform } = require( 'babel-core' )
-const { relative } = require( 'path' )
 const { EOL } = require( 'os' )
 
 /*--------- 2) Options ---------*/

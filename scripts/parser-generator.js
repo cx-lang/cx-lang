@@ -9,13 +9,12 @@ require( './globalHelpers' )
 const globby = require( 'globby' )
 const { compiler, GrammarError, parser } = require( 'pegjs-dev' )
 const { findRule } = require( 'pegjs-dev/lib/compiler/asts' )
-const { relative } = require( 'path' )
 const toCamelCase = require( 'camelcase' )
 
 /*--------- 2) Options ---------*/
 
-const srcDir = join( srcDir, 'src', 'cx-lang', 'language' )
-const outDir = join( srcDir, 'lib', 'cx-lang', 'language' )
+const srcDir = join( WORKING_DIR, 'src', 'cx-lang', 'language' )
+const outDir = join( WORKING_DIR, 'lib', 'cx-lang', 'language' )
 const patterns = [ '**/*.pegjs', '**/*.util.js' ]
 
 const options = {
@@ -61,7 +60,7 @@ function buildErrorMessage( error, ast ) {
   const { filename, start } = error.location
 
   const position = ( filename ? `In "${ filename }", at ` : 'At ' )
-                 + `Line ${ start.line }, Column ` + start.column
+                 + `Line ${ start.line }, Column ${ start.column }`
 
   let results = PREDEFINED_RULE.exec( error.message )
   if ( results ) {

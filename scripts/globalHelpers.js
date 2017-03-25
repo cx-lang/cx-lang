@@ -43,6 +43,7 @@ Object.assign( global, {
   // aliases to useful module methods
 
   join:      path.join,
+  relative:  path.relative,
   exists:    fs.existsSync,
   exit:      process.exit,
   mkdir:     mkdirp.sync,
