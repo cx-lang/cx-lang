@@ -45,9 +45,9 @@
   },
   "devDependencies": {
     "pegjs-dev": "0.10.0-117",
-    "eslint": "3.17.1",
+    "eslint": "3.18.0",
     "eslint-config-mdcs": "4.2.2",
-    "babel-eslint": "7.1.1",
+    "babel-eslint": "7.2.1",
     "babel-core": "6.24.0",
     "babel-plugin-resolver": "1.1.0",
     "babel-plugin-transform-es2015-modules-commonjs": "6.24.0",
