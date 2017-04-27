@@ -1,47 +1,46 @@
-#!/usr/bin/env node
 
-'use strict'
+"use strict";
 
-/*--------- 1) Dependencies ---------*/
+/* --------- 1) Dependencies ---------*/
 
-require( './globalHelpers' )
+require( "./globalHelpers" );
 
-const Mocha = require( 'mocha' )
+const Mocha = require( "mocha" );
 
-/*--------- 2) Options ---------*/
+/* --------- 2) Options ---------*/
 
 let mochaopts = {
 
-  'ui': 'bdd',
-  'reporter': 'spec',
-  'timeout': 30000
+    "ui": "bdd",
+    "reporter": "spec",
+    "timeout": 30000
 
-}
+};
 
-let patterns = [ '**/*.{spec,test}.js' ]
-WORKING_DIR = join( WORKING_DIR, 'lib', 'spec' )
+let patterns = [ "**/*.{spec,test}.js" ];
+WORKING_DIR = join( WORKING_DIR, "lib", "spec" );
 
 if ( process.argv.length > 2 ) {
 
-  mochaopts = Object.assign( mochaopts, OPTIONS )
+    mochaopts = Object.assign( mochaopts, OPTIONS );
 
-  if ( PATHS ) {
+    if ( PATHS ) {
 
-    patterns = PATHS
-    WORKING_DIR = process.cwd()
+        patterns = PATHS;
+        WORKING_DIR = process.cwd();
 
-  }
+    }
 
 }
 
-/*--------- 3) Run tests ---------*/
+/* --------- 3) Run tests ---------*/
 
-/* global mocha*/ global.mocha = new Mocha( mochaopts )
+/* global mocha*/ global.mocha = new Mocha( mochaopts );
 
 glob( patterns, ( filename, id ) => {
 
-  ( id.endsWith( '.spec.js' ) ? require : mocha.addFile )( filename )
+    ( id.endsWith( ".spec.js" ) ? require : mocha.addFile )( filename );
 
-} )
+} );
 
-mocha.run( process.exit )
+mocha.run( process.exit );

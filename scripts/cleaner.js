@@ -1,37 +1,36 @@
-#!/usr/bin/env node
 
-'use strict'
+"use strict";
 
-/*--------- 1) Dependencies ---------*/
+/* --------- 1) Dependencies ---------*/
 
-require( './globalHelpers' )
+require( "./globalHelpers" );
 
-const rimraf = require( 'rimraf' ).sync
+const rimraf = require( "rimraf" ).sync;
 
-/*--------- 2) Options ---------*/
+/* --------- 2) Options ---------*/
 
-let patterns = [ 'lib', '.eslintcache' ]
+let patterns = [ "lib", ".eslintcache" ];
 
 if ( PATHS ) {
 
-  patterns = PATHS
-  WORKING_DIR = process.cwd()
+    patterns = PATHS;
+    WORKING_DIR = process.cwd();
 
 }
 
-/*--------- 3) Cleaner ---------*/
+/* --------- 3) Cleaner ---------*/
 
 glob( patterns, ( filename, id ) => {
 
-  try {
+    try {
 
-    rimraf( filename )
-    console.log( 'Removed ' + id )
+        rimraf( filename );
+        console.log( "Removed " + id );
 
-  } catch ( error ) {
+    } catch ( error ) {
 
-    console.error( error )
+        console.error( error );
 
-  }
+    }
 
-} )
+} );

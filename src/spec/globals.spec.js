@@ -1,5 +1,5 @@
-import * as cxlang from '../'
-import { expect } from './Expecter'
+import * as cxlang from "../";
+import { expect } from "./Expecter";
 
-global.cxlang = cxlang
-global.expect = expect
+global.cxlang = cxlang;
+global.expect = expect;

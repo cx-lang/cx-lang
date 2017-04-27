@@ -2,8 +2,8 @@
 // Native functions.
 //
 
-const __hasOwnProperty = Object.prototype.hasOwnProperty
-const __toString = Object.prototype.toString
+const __hasOwnProperty = Object.prototype.hasOwnProperty;
+const __toString = Object.prototype.toString;
 
 //
 // Builds default Expectation error message.
@@ -11,7 +11,7 @@ const __toString = Object.prototype.toString
 
 export function buildMessage( actual, expected ) {
 
-  return `Expecting '${ expected }', returned '${ actual }'`
+    return `Expecting '${ expected }', returned '${ actual }'`;
 
 }
 
@@ -21,33 +21,33 @@ export function buildMessage( actual, expected ) {
 
 export class ExpectationError extends Error {
 
-  constructor( actual, expected, message ) {
+    constructor( actual, expected, message ) {
 
-    super()
+        super();
 
-    this.name = 'ExpectationError'
+        this.name = "ExpectationError";
 
-    if ( arguments.length === 1 ) {
+        if ( arguments.length === 1 ) {
 
-      this.message = actual
+            this.message = actual;
 
-    } else {
+        } else {
 
-      this.actual = actual
-      this.expected = expected
-      this.message = message || buildMessage( actual, expected )
+            this.actual = actual;
+            this.expected = expected;
+            this.message = message || buildMessage( actual, expected );
+
+        }
+
+        if ( typeof Error.captureStackTrace === "function" )
+
+            Error.captureStackTrace( this, equal );
+
+        else
+
+      this.stack = ( new Error() ).stack;
 
     }
-
-    if ( typeof Error.captureStackTrace === 'function' )
-
-      Error.captureStackTrace( this, equal )
-
-    else
-
-      this.stack = ( new Error() ).stack
-
-  }
 
 }
 
@@ -57,11 +57,11 @@ export class ExpectationError extends Error {
 
 export function equal( actual, expected, message ) {
 
-  message = message || buildMessage( actual, expected )
+    message = message || buildMessage( actual, expected );
 
-  if ( actual !== expected )
+    if ( actual !== expected )
 
-    throw new ExpectationError( message )
+        throw new ExpectationError( message );
 
 }
 
@@ -75,55 +75,55 @@ export class Expecter {
   // Constructors...
   //
 
-  constructor( value ) {
+    constructor( value ) {
 
-    Object.defineProperty( this, 'value', { value } )
+        Object.defineProperty( this, "value", { value } );
 
-  }
+    }
 
-  static expect( value ) {
+    static expect( value ) {
 
-    return new Expecter( value )
+        return new Expecter( value );
 
-  }
+    }
 
   //
   // Builds a Expectation error message.
   //
 
-  message( expected ) {
+    message( expected ) {
 
-    return buildMessage( this.value, expected )
+        return buildMessage( this.value, expected );
 
-  }
+    }
 
   //
   // Simple check if `this.value` contains a property called `key`.
   //
 
-  property( key, message ) {
+    property( key, message ) {
 
-    message = message || `Expecting to have property '${ key }'`
+        message = message || `Expecting to have property '${ key }'`;
 
-    equal( key in this.value, true, message )
+        equal( key in this.value, true, message );
 
-    return this
+        return this;
 
-  }
+    }
 
   //
   // Check if `this.value` contains it's own property called `key`.
   //
 
-  own( key, message ) {
+    own( key, message ) {
 
-    message = message || `Expecting to have own property '${ key }'`
+        message = message || `Expecting to have own property '${ key }'`;
 
-    equal( __hasOwnProperty.call( this.value, key ), true, message )
+        equal( __hasOwnProperty.call( this.value, key ), true, message );
 
-    return this
+        return this;
 
-  }
+    }
 
   //
   // Ensure the value for the own property called `key` equals
@@ -134,63 +134,63 @@ export class Expecter {
   // new Expecter.
   //
 
-  at( key, value, message ) {
+    at( key, value, message ) {
 
-    if ( typeof value === 'function' ) {
+        if ( typeof value === "function" ) {
 
-      this.own( key )
+            this.own( key );
 
-      value.call( message, new Expecter( this.value[ key ] ) )
+            value.call( message, new Expecter( this.value[ key ] ) );
 
-    } else {
+        } else {
 
-      message = message || `Expecting { '${ key }': '${ value }' }`
+            message = message || `Expecting { '${ key }': '${ value }' }`;
 
-      equal( this.value[ key ], value, message )
+            equal( this.value[ key ], value, message );
+
+        }
+
+        return this;
 
     }
-
-    return this
-
-  }
 
   //
   // Assert if `this.value` strictly equals `expected`.
   //
 
-  toEqual( expected, message ) {
+    toEqual( expected, message ) {
 
-    equal( this.value, expected, message )
+        equal( this.value, expected, message );
 
-    return this
+        return this;
 
-  }
+    }
 
   //
   // Ensure the type is as expected.
   //
 
-  typeof( target, message ) {
+    typeof( target, message ) {
 
-    const actual = __toString.call( this.value ).toLowerCase()
-    const expected = `[object ${ target.toLowerCase() }]`
+        const actual = __toString.call( this.value ).toLowerCase();
+        const expected = `[object ${ target.toLowerCase() }]`;
 
-    equal( actual, expected, message )
+        equal( actual, expected, message );
 
-    return this
+        return this;
 
-  }
+    }
 
   //
   // Ensure the source equals `expected`.
   //
 
-  toString( expected, message ) {
+    toString( expected, message ) {
 
-    equal( this.value.toString(), expected, message )
+        equal( this.value.toString(), expected, message );
 
-    return this
+        return this;
 
-  }
+    }
 
 }

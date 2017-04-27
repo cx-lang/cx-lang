@@ -1,9 +1,9 @@
-import { join } from 'path'
+import { join } from "path";
 
-const _require = require
+const _require = require;
 
 export function require( id ) {
 
-  return _require( join( __dirname, id ) )
+    return _require( join( __dirname, id ) );
 
 }

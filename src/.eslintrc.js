@@ -1,19 +1,16 @@
-'use strict'
+"use strict";
 
 module.exports = {
 
-  'extends': '../.eslintrc.js',
+    "extends": [
+        "futagozaryuu/esnext",
+        "futagozaryuu/node"
+    ],
 
-  'parserOptions': {
+    "parserOptions": {
+        "sourceType": "module"
+    },
 
-    'ecmaVersion': '2017',
-    'sourceType': 'module',
-    'ecmaFeatures': {
+    "root": true
 
-      'experimentalObjectRestSpread': true
-
-    }
-
-  }
-
-}
+};

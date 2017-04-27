@@ -1,63 +1,66 @@
 {
-  "name": "cx-lang",
-  "version": "v0.1.0-rev7",
-  "description": "A statically typed dynamic language",
-  "keywords": [
-    "cx",
-    "cx-lang",
-    "parser",
-    "compiler",
-    "transpiler",
-    "ast",
-    "javascript",
-    "c++",
-    "cpp"
-  ],
-  "repository": "cx-lang/cx-lang",
-  "bugs": "https://github.com/cx-lang/cx-lang/issues",
-  "license": "MIT",
-  "author": "Futago-za Ryuu",
-  "files": [
-    "bin",
-    "lib"
-  ],
-  "main": "lib/cx-lang",
-  "bin": {
-    "cx-lang": "bin/cx-lang",
-    "libcx": "bin/libcx"
-  },
-  "scripts": {
-    "est": "node scripts/es-transpiler",
-    "pg": "node scripts/parser-generator",
-    "lint": "eslint --cache . bin scripts src",
-    "test": "node scripts/spec-runner",
-    "clean": "node scripts/cleaner"
-  },
-  "dependencies": {
-    "camelcase": "4.1.0",
-    "json5": "0.5.1",
-    "bluebird": "3.5.0",
-    "mz": "2.6.0",
-    "mkdirp": "0.5.1",
-    "rimraf": "2.6.1",
-    "globby": "6.1.0",
-    "minimist": "1.2.0"
-  },
-  "devDependencies": {
-    "pegjs-dev": "0.10.0-117",
-    "eslint": "3.19.0",
-    "eslint-config-mdcs": "4.2.2",
-    "babel-eslint": "7.2.3",
-    "babel-core": "6.24.1",
-    "babel-plugin-resolver": "1.1.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "6.24.1",
-    "babel-preset-es2016": "6.24.1",
-    "babel-plugin-syntax-trailing-function-commas": "6.22.0",
-    "babel-plugin-transform-async-to-module-method": "6.24.1",
-    "babel-preset-stage-0": "6.24.1",
-    "mocha": "3.3.0"
-  },
-  "engines": {
-    "node": ">= 6.0.0"
-  }
+    "name": "cx-lang",
+    "version": "v0.1.0-rev7",
+    "description": "A statically typed dynamic language",
+    "keywords": [
+        "cx",
+        "cx-lang",
+        "parser",
+        "compiler",
+        "transpiler",
+        "ast",
+        "javascript",
+        "c++",
+        "cpp"
+    ],
+    "repository": "cx-lang/cx-lang",
+    "bugs": "https://github.com/cx-lang/cx-lang/issues",
+    "license": "MIT",
+    "author": "Futago-za Ryuu",
+    "files": [
+        "bin",
+        "lib"
+    ],
+    "main": "lib/cx-lang.js",
+    "bin": {
+        "cx-lang": "bin/cx-lang.js",
+        "libcx": "bin/libcx.js"
+    },
+    "scripts": {
+        "est": "node scripts/es-transpiler",
+        "pg": "node scripts/parser-generator",
+        "lint": "eslint --cache bin scripts src",
+        "test": "node scripts/spec-runner",
+        "clean": "node scripts/cleaner"
+    },
+    "dependencies": {
+        "camelcase": "4.1.0",
+        "json5": "0.5.1",
+        "bluebird": "3.5.0",
+        "mz": "2.6.0",
+        "mkdirp": "0.5.1",
+        "rimraf": "2.6.1",
+        "globby": "6.1.0",
+        "minimist": "1.2.0"
+    },
+    "devDependencies": {
+        "pegjs-dev": "0.10.0-117",
+        "eslint": "3.19.0",
+        "eslint-config-futagozaryuu": "2.1.0",
+        "babel-core": "6.24.1",
+        "babel-plugin-resolver": "1.1.0",
+        "babel-plugin-transform-es2015-modules-commonjs": "6.24.1",
+        "babel-preset-es2016": "6.24.1",
+        "babel-plugin-syntax-trailing-function-commas": "6.22.0",
+        "babel-plugin-transform-async-to-module-method": "6.24.1",
+        "babel-preset-stage-0": "6.24.1",
+        "mocha": "3.3.0"
+    },
+    "engines": {
+        "node": ">= 6.0.0"
+    },
+    "eslintConfig": {
+        "extends": "futagozaryuu/node-v6",
+        "root": true
+    }
 }
