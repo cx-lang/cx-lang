@@ -1,21 +1,19 @@
-'use strict'
+"use strict";
 
 module.exports = {
 
-  'extends': '../.eslintrc.js',
+    "env": {
 
-  'env': {
+        "mocha": true
 
-    'mocha': true
+    },
 
-  },
+    "globals": {
 
-  'globals': {
+        "cxlang": true,
+        "expect": true,
+        "mocha": true
 
-    'cxlang': true,
-    'expect': true,
-    'mocha': true
+    }
 
-  }
-
-}
+};
