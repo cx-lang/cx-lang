@@ -34,7 +34,7 @@
     "clean": "node scripts/cleaner"
   },
   "dependencies": {
-    "camelcase": "4.0.0",
+    "camelcase": "4.1.0",
     "json5": "0.5.1",
     "bluebird": "3.5.0",
     "mz": "2.6.0",
@@ -45,17 +45,17 @@
   },
   "devDependencies": {
     "pegjs-dev": "0.10.0-117",
-    "eslint": "3.18.0",
+    "eslint": "3.19.0",
     "eslint-config-mdcs": "4.2.2",
-    "babel-eslint": "7.2.1",
-    "babel-core": "6.24.0",
+    "babel-eslint": "7.2.3",
+    "babel-core": "6.24.1",
     "babel-plugin-resolver": "1.1.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "6.24.0",
-    "babel-preset-es2016": "6.22.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "6.24.1",
+    "babel-preset-es2016": "6.24.1",
     "babel-plugin-syntax-trailing-function-commas": "6.22.0",
-    "babel-plugin-transform-async-to-module-method": "6.22.0",
-    "babel-preset-stage-0": "6.22.0",
-    "mocha": "3.2.0"
+    "babel-plugin-transform-async-to-module-method": "6.24.1",
+    "babel-preset-stage-0": "6.24.1",
+    "mocha": "3.3.0"
   },
   "engines": {
     "node": ">= 7.0.0"
