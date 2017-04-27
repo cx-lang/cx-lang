@@ -1,6 +1,6 @@
 import { join } from "path";
 
-const _require = require;
+const _require = module.require;
 
 export function require( id ) {
 
