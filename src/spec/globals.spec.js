@@ -1,4 +1,4 @@
-import * as cxlang from "../";
+import * as cxlang from "cx-lang";
 import { expect } from "./Expecter";
 
 global.cxlang = cxlang;

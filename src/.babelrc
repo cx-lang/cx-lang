@@ -5,7 +5,7 @@
 
     "plugins": [
 
-        [ "resolver", { "resolveDirs": [ "src" ] } ],
+        [ "module-resolver", { "root": [ "src" ] } ],
         [ "transform-async-to-module-method", {
 
                 "module": "bluebird",
