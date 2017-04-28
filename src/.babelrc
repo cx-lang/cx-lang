@@ -1,28 +1,36 @@
 {
 
-  "babelrc": false,
-  "sourceMaps": true,
+    "babelrc": false,
+    "sourceMaps": true,
 
-  "plugins": [
+    "plugins": [
 
-    [ "resolver", { "resolveDirs": [ "src" ] } ],
-    "transform-es2015-modules-commonjs",
+        [ "resolver", { "resolveDirs": [ "src" ] } ],
+        [ "transform-async-to-module-method", {
 
-    "syntax-trailing-function-commas",
-    [ "transform-async-to-module-method", {
+                "module": "bluebird",
+                "method": "coroutine"
 
-        "module": "bluebird",
-        "method": "coroutine"
+        } ]
 
-    } ]
+    ],
 
-  ],
+    "presets": [
 
-  "presets": [
+        "stage-0",
+        [ "env", {
 
-    "es2016",
-    "stage-0"
+            "exclude": [
+                "transform-async-to-generator"
+            ],
+            "loose": true,
+            "modules": "commonjs",
+            "targets": {
+                "node": 6
+            }
 
-  ]
+        } ]
+
+    ]
 
 }
