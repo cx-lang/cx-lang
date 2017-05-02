@@ -37,15 +37,7 @@ if ( ! exists( mtcache ) ) {
 const babelrc = readJSON( join( srcDir, ".babelrc" ) );
 const mtimes = require( mtcache );
 
-/* --------- 3) Utilities ---------*/
-
-babelrc.shouldPrintComment = function shouldPrintComment( comment ) {
-
-    return comment.startsWith( "eslint" ) === false;
-
-};
-
-/* --------- 4) Transpiler ---------*/
+/* --------- 3) Transpiler ---------*/
 
 glob( patterns, ( source, id ) => {
 

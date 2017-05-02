@@ -3,34 +3,6 @@
     "babelrc": false,
     "sourceMaps": true,
 
-    "plugins": [
-
-        [ "module-resolver", { "root": [ "src" ] } ],
-        [ "transform-async-to-module-method", {
-
-                "module": "bluebird",
-                "method": "coroutine"
-
-        } ]
-
-    ],
-
-    "presets": [
-
-        "stage-0",
-        [ "env", {
-
-            "exclude": [
-                "transform-async-to-generator"
-            ],
-            "loose": true,
-            "modules": "commonjs",
-            "targets": {
-                "node": 6
-            }
-
-        } ]
-
-    ]
+    "presets": [ "futagozaryuu" ]
 
 }
