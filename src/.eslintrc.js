@@ -7,10 +7,6 @@ module.exports = {
         "futagozaryuu/node"
     ],
 
-    "parserOptions": {
-        "sourceType": "module"
-    },
-
     "root": true
 
 };
