@@ -3,6 +3,15 @@
     "babelrc": false,
     "sourceMaps": true,
 
+    "plugins": [
+        [
+            "transform-runtime", {
+                "polyfill": true,
+                "regenerator": false
+            }
+        ]
+    ],
+
     "presets": [ "futagozaryuu" ]
 
 }
