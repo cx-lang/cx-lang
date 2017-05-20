@@ -1,46 +1,22 @@
-
 "use strict";
 
-/* --------- 1) Dependencies ---------*/
-
-require( "./globalHelpers" );
-
+const globby = require( "globby" );
 const Mocha = require( "mocha" );
 
-/* --------- 2) Options ---------*/
+const files = globby.sync( [ "lib/spec/**/*.{spec,test}.js" ] );
 
-let mochaopts = {
+if ( files.length ) {
 
-    "ui": "bdd",
-    "reporter": "spec",
-    "timeout": 30000
+    const mocha = new Mocha( {
 
-};
+        "ui": "bdd",
+        "reporter": "spec",
+        "timeout": 30000
 
-let patterns = [ "**/*.{global,spec,test}.js" ];
-WORKING_DIR = join( WORKING_DIR, "lib", "spec" );
+    } );
 
-if ( process.argv.length > 2 ) {
+    files.forEach( mocha.addFile );
 
-    mochaopts = Object.assign( mochaopts, OPTIONS );
-
-    if ( PATHS ) {
-
-        patterns = PATHS;
-        WORKING_DIR = process.cwd();
-
-    }
+    mocha.run( process.exit );
 
 }
-
-/* --------- 3) Run tests ---------*/
-
-/* global mocha*/ global.mocha = new Mocha( mochaopts );
-
-glob( patterns, ( filename, id ) => {
-
-    ( id.endsWith( ".global.js" ) ? require : mocha.addFile )( filename );
-
-} );
-
-mocha.run( process.exit );

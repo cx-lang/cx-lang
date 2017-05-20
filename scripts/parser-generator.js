@@ -1,20 +1,27 @@
+/* eslint no-use-before-define: 0 */
 
 "use strict";
 
 /* --------- 1) Dependencies ---------*/
 
-require( "./globalHelpers" );
-
-const globby = require( "globby" );
+const glob = require( "./util/glob" );
+const pathinfo = require( "./util/pathinfo" );
+const readFile = require( "./util/readFile" );
+const writeFile = require( "./util/writeFile" );
 const { compiler, GrammarError, parser } = require( "pegjs-dev" );
 const { findRule } = require( "pegjs-dev/lib/compiler/asts" );
 const toCamelCase = require( "camelcase" );
+const chalk = require( "chalk" );
+const prettysize = require( "prettysize" );
+const mkdirp = require( "mkdirp" );
+const { EOL } = require( "os" );
+const { join, relative } = require( "path" );
 
 /* --------- 2) Options ---------*/
 
-const srcDir = join( WORKING_DIR, "src", "cx-lang", "language" );
-const outDir = join( WORKING_DIR, "lib", "cx-lang", "language" );
 const patterns = [ "**/*.pegjs", "**/*.util.js" ];
+const srcDir = join( __dirname, "..", "src", "cx-lang", "language" );
+const outDir = join( __dirname, "..", "lib", "cx-lang", "language" );
 
 const options = {
 
@@ -37,6 +44,21 @@ const parentTypes = {
 
 };
 
+function nicesize( n ) {
+
+    return prettysize( n, 0, 0, 2 ).replace( ".00", "" );
+
+}
+
+function die( err ) {
+
+    if ( err.location && err.message ) console.error( err.message );
+    else console.error( err.stack || err.message || err );
+
+    process.exit( 1 );
+
+}
+
 function rewriteLocations( node, filename ) {
 
     if ( node.location ) node.location.filename = filename;
@@ -57,12 +79,13 @@ const PREDEFINED_RULE = /Rule "(.*)" is already defined/;
 function buildErrorMessage( error, ast ) {
 
     const { filename, start } = error.location;
+    let message = error.message;
 
     const position = ( filename ? `In "${ filename }", at ` : "At " )
                    + `Line ${ start.line }, Column ${ start.column }`;
 
-    let results = PREDEFINED_RULE.exec( error.message );
-    if ( results ) {
+    let results = PREDEFINED_RULE.exec( message );
+    if ( ast && results ) {
 
         results = findRule( ast, results[ 1 ] );
         if ( results ) {
@@ -70,7 +93,7 @@ function buildErrorMessage( error, ast ) {
             results = results.location.filename;
             if ( results !== filename ) {
 
-                error.message = error.message.slice( 0, -1 ) + ` of "${ results }"`;
+                message = message.slice( 0, -1 ) + ` of "${ results }"`;
 
             }
 
@@ -79,7 +102,32 @@ function buildErrorMessage( error, ast ) {
     }
 
     PREDEFINED_RULE.lastIndex = -1;
-    return position + " :\n\n" + error.message;
+    return position + " :\n\n" + message;
+
+}
+
+function parse( filename ) {
+
+    try {
+
+        const source = readFile( filename );
+
+        if ( source.trim().length === 0 ) return { rules: [] };
+
+        return parser.parse( source );
+
+    } catch ( error ) {
+
+        if ( error.location ) {
+
+            error.location.filename = pathinfo( filename ).id();
+            error.message = buildErrorMessage( error );
+
+        }
+
+        die( error );
+
+    }
 
 }
 
@@ -87,7 +135,7 @@ function compile( ast ) {
 
     try {
 
-        return compiler.compile( ast, convertedPasses, options );
+        return compiler.compile( ast, convertedPasses, options ) + EOL;
 
     } catch ( error ) {
 
@@ -97,7 +145,7 @@ function compile( ast ) {
 
         }
 
-        throw error;
+        die( error );
 
     }
 
@@ -142,109 +190,125 @@ const convertedPasses = {
 
 /* --------- 5) Generate parser ---------*/
 
-globby( patterns, { src: srcDir } )
+const targets = {};
+const rules = [ false ];
+let code = "";
+const dependencies = [];
 
-    .catch( die )
+glob( patterns, filename => {
 
-    .then( files => {
+    const source = pathinfo( filename, srcDir );
+    const id = source.id();
+    const size = nicesize( source.size() );
 
-        if ( files.length === 0 ) return null;
+    if ( source.Name.endsWith( ".util.js" ) ) {
 
-        const targets = {};
-        const rules = [ false ];
-        let code = "";
-        const dependencies = [];
+        dependencies.push( id );
 
-        let id, filename, grammar, source;
+        console.log(
 
-        function multiStartPass( rule ) {
+            `  - ${ chalk.yellow( id ) }` +
+            chalk.grey( `(${ size })` )
 
-            if ( rule.name !== "start" ) return rules.push( rule );
+        );
 
-            if ( targets[ id ] ) {
+        return true;
 
-                const previous = targets[ id ].location.start;
+    }
 
-                throw new GrammarError(
-                    `Rule "start" was previously defined `
-                    + `at line ${ previous.line }, `
-                    + `column ${ previous.column } `
-                    + `in "${ id }"`,
-                    rule.location
-                );
+    const grammar = parse( filename );
+    rewriteLocations( grammar, id );
 
-            }
+    const initializer = grammar.initializer ? grammar.initializer.code : false;
+    if ( typeof initializer === "string" && initializer.trim().length > 0 ) {
+
+        code += `\n// ${ id }\n\n${ initializer }\n`;
+
+    }
+
+    grammar.rules.forEach( rule => {
+
+        if ( rule.name !== "start" ) return rules.push( rule );
+
+        if ( targets[ id ] ) {
+
+            const previous = targets[ id ].location.start;
+
+            console.warn( new GrammarError(
+                `Rule "start" was previously defined `
+                + `at line ${ previous.line }, `
+                + `column ${ previous.column } `
+                + `in "${ id }"`,
+                rule.location
+            ) );
+
+        } else {
 
             targets[ id ] = rule;
 
         }
 
-        for ( id of files ) {
+    } );
 
-            id = id.replace( "/", SEPARATOR );
-            filename = join( srcDir, id );
+    let count = grammar.rules.length + " rule";
+    if ( grammar.rules.length !== 1 ) count += "s";
 
-            if ( id.endsWith( ".util.js" ) ) {
+    console.log(
 
-                dependencies.push( id );
+        `  ${ targets[ id ] ? ">" : "-" } ${ chalk.cyan( id ) }` +
+        chalk.grey( `(${ count }, ${ size })` )
 
-                console.log( `  - ${ forward( filename ) }` );
-                continue;
+    );
 
-            }
+}, { cwd: srcDir } );
 
-            grammar = parser.parse( readFile( filename ) );
+const targetids = Object.keys( targets );
+if ( targetids.length > 0 ) {
 
-            rewriteLocations( grammar, id );
+    console.log( "" );
+    targetids.forEach( id => {
 
-            source = grammar.initializer ? grammar.initializer.code : false;
-            if ( typeof source === "string" && source.trim().length > 0 ) {
+        const filename = join( outDir, id.replace( ".pegjs", ".js" ) );
+        const target = pathinfo( filename );
+        rules[ 0 ] = targets[ id ];
 
-                code += `\n// ${ forward( id ) }\n\n${ source }\n`;
+        options.filename = id;
+        options.dependencies = {};
 
-            }
+        dependencies.forEach( dependency => {
 
-            grammar.rules.forEach( multiStartPass );
+            const name = dependency.split( "/" ).pop().slice( 0, -8 );
+            dependency = relative( target.Dir, join( outDir, dependency ) );
 
-            console.log( `  - ${ forward( filename ) }` );
-
-        }
-
-        console.log( "" );
-        Object.keys( targets ).forEach( id => {
-
-            const filename = join( outDir, id.replace( ".pegjs", ".js" ) );
-            rules[ 0 ] = targets[ id ];
-
-            options.filename = id;
-            options.dependencies = {};
-
-            dependencies.forEach( dependency => {
-
-                const name = pathinfo( dependency ).name.slice( 0, -8 );
-                dependency = relative( filename, join( outDir, dependency ) );
-
-                options.dependencies[ toCamelCase( name ) ] = dependency;
-
-            } );
-
-            const ast = {
-
-                type: "grammar",
-                initializer: {
-                    type: "initializer",
-                    code,
-                    location: dummyLocation
-                },
-                rules,
-                location: dummyLocation
-
-            };
-
-            mkdir( pathinfo( filename ).dir );
-            writeFile( filename, compile( ast ) );
-            console.log( `Generated ${ filename }` );
+            options.dependencies[ toCamelCase( name ) ] = dependency.replace( /\\/g, "/" );
 
         } );
 
+        const ast = {
+
+            type: "grammar",
+            initializer: {
+                type: "initializer",
+                code,
+                location: dummyLocation
+            },
+            rules,
+            location: dummyLocation
+
+        };
+
+        mkdirp.sync( target.Dir );
+        writeFile( filename, compile( ast ) );
+
+        const size = nicesize( target.size( 1 ) );
+        console.log(
+
+            chalk.green( "Generated " ) +
+            chalk.magenta( target.id() ) +
+            chalk.grey( `(${ size })` )
+
+        );
+
     } );
+
+}

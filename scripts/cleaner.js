@@ -1,36 +1,19 @@
-
 "use strict";
 
-/* --------- 1) Dependencies ---------*/
+const glob = require( "./util/glob" );
+const chalk = require( "chalk" );
+const rimraf = require( "rimraf" );
 
-require( "./globalHelpers" );
+glob.attempt( [
 
-const rimraf = require( "rimraf" ).sync;
+    "lib",
+    "examples/**/output",
+    ".eslintcache",
+    "npm-debug.log"
 
-/* --------- 2) Options ---------*/
+], ( filename, id ) => {
 
-let patterns = [ "lib", ".eslintcache" ];
-
-if ( PATHS ) {
-
-    patterns = PATHS;
-    WORKING_DIR = process.cwd();
-
-}
-
-/* --------- 3) Cleaner ---------*/
-
-glob( patterns, ( filename, id ) => {
-
-    try {
-
-        rimraf( filename );
-        console.log( "Removed " + id );
-
-    } catch ( error ) {
-
-        console.error( error );
-
-    }
+    rimraf.sync( filename );
+    console.log( chalk.grey( "Removed " + id ) );
 
 } );

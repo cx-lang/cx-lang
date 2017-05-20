@@ -1,98 +1,61 @@
-
 "use strict";
 
 /* --------- 1) Dependencies ---------*/
 
-require( "./globalHelpers" );
-
-const { transform } = require( "babel-core" );
+const glob = require( "./util/glob" );
+const pathinfo = require( "./util/pathinfo" );
+const readFile = require( "./util/readFile" );
+const writeFile = require( "./util/writeFile" );
+const babel = require( "babel-core" );
+const chalk = require( "chalk" );
+const mkdirp = require( "mkdirp" );
 const { EOL } = require( "os" );
+const { join, relative } = require( "path" );
 
 /* --------- 2) Options ---------*/
 
-let patterns = [ "**/*.js" ];
-let srcDir = join( __dirname, "..", "src" );
-let outDir = join( __dirname, "..", "lib" );
+const srcDir = join( __dirname, "..", "src" );
+const outDir = join( __dirname, "..", "lib" );
 
-const mtcache = join( outDir, ".mtimes-cache.json" );
+const babelrc = JSON.parse( readFile( join( srcDir, ".babelrc" ) ) );
 
-if ( PATHS ) {
+/* --------- 3) Transpile... ---------*/
 
-    patterns = PATHS;
+glob.attempt( [ "**/*.js" ], ( filename, id ) => {
 
-    srcDir = OPTIONS.srcDir || srcDir;
-    outDir = OPTIONS.outDir || outDir;
+    const source = pathinfo( filename );
+    const target = pathinfo( join( outDir, id ) );
 
-}
+    if ( ! source.isFile() ) return false;
+    if ( target.exists() && source.mtime() < target.mtime() ) return false;
 
-WORKING_DIR = srcDir;
+    const relativeName = relative( target.Dir, filename );
+    babelrc.filename = filename;
+    babelrc.filenameRelative = relativeName;
+    babelrc.sourceFileName = relativeName;
+    babelrc.sourceMapTarget = relativeName;
+    babelrc.sourceRoot = relative( target.Dir, source.Dir );
 
-if ( ! exists( mtcache ) ) {
+    const input = readFile( filename );
+    const output = babel.transform( input, babelrc );
 
-    mkdir( outDir );
-    writeFile( mtcache, "{}" );
+    mkdirp.sync( target.Dir );
+    writeFile( target.Path, `${ output.code + EOL + EOL }//# sourceMappingURL=${ source.Name }.map${ EOL }` );
+    writeFile( target.Path + ".map", JSON.stringify( output.map, null, "  " ) + EOL );
 
-}
+    const base = input.length;
+    const peak = output.code.length;
+    const percentage = Math.round( ( ( peak - base ) / base ) * 100 );
+    let note;
 
-const babelrc = readJSON( join( srcDir, ".babelrc" ) );
-const mtimes = require( mtcache );
+    if ( base < peak )
 
-/* --------- 3) Transpiler ---------*/
+        note = chalk.red( percentage + "% bigger" );
 
-glob( patterns, ( source, id ) => {
+    else
 
-    const target = join( outDir, id );
-    const mapfile = target + ".map";
+        note = chalk.green( -percentage + "% smaller" );
 
-    const stat = lstat( source );
-    const mtime = +stat.mtime;
-    const basename = stat.name;
-    const dirname = pathinfo( target ).dir;
+    console.log( source.id() + " -> " + target.id() + " " + note );
 
-    if ( ! stat.isFile() ) return false;
-
-    if ( exists( target ) && mtimes[ id ] ) {
-
-        if ( mtime === mtimes[ id ] ) return false;
-
-    }
-    mtimes[ id ] = mtime;
-    mtimes.updated = true;
-
-    let input, output;
-    const relativeName = relative( dirname, source );
-
-    try {
-
-        babelrc.filename = source;
-        babelrc.filenameRelative = relativeName;
-        babelrc.sourceFileName = relativeName;
-        babelrc.sourceMapTarget = relativeName;
-        babelrc.sourceRoot = relative( dirname, srcDir );
-
-        input = readFile( source );
-        output = transform( input, babelrc );
-
-        output.code += EOL + EOL + `//# sourceMappingURL=${ basename }.map` + EOL;
-
-        mkdir( dirname );
-
-        writeFile( target, output.code );
-        writeJSON( mapfile, output.map );
-
-        console.log( "Transpiled " + id.replace( SEPARATOR, "/" ) );
-
-    } catch ( error ) {
-
-        console.error( error );
-
-    }
-
-} );
-
-if ( mtimes.updated ) {
-
-    delete mtimes.updated;
-    writeJSON( mtcache, mtimes );
-
-}
+}, { cwd: srcDir } );
