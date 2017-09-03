@@ -3,7 +3,13 @@
 const globby = require( "globby" );
 const Mocha = require( "mocha" );
 
-const files = globby.sync( [ "lib/spec/**/*.{spec,test}.js" ] );
+require( "babel-register" )( {
+
+    only: /cx-lang([\/|\\\\])src/
+
+} );
+
+const files = globby.sync( [ "src/**/*.{spec,test}.js" ] );
 
 if ( files.length ) {
 
@@ -11,7 +17,7 @@ if ( files.length ) {
 
         "ui": "bdd",
         "reporter": "spec",
-        "timeout": 30000
+        "timeout": 5000,
 
     } );
 
