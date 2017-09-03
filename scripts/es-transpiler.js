@@ -14,10 +14,15 @@ const { join, relative } = require( "path" );
 
 /* --------- 2) Options ---------*/
 
-const srcDir = join( __dirname, "..", "src" );
+const srcDir = join( __dirname, "..", "src", "cx-lang" );
 const outDir = join( __dirname, "..", "lib" );
 
-const babelrc = JSON.parse( readFile( join( srcDir, ".babelrc" ) ) );
+const babelrc = require( join( srcDir, ".babelrc" ) );
+babelrc.babelrc = false;
+babelrc.ignore = [
+    "__tests__",
+    "*.{spec,test}.js",
+];
 
 /* --------- 3) Transpile... ---------*/
 
