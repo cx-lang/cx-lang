@@ -1,6 +1,7 @@
 /examples/**/output
-/node_modules
 /lib
+/node_modules
 /*.sublime-*
 /.eslintcache
 /npm-debug.log
+/package-lock.json
