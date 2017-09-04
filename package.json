@@ -27,8 +27,8 @@
         "libcx": "bin/libcx.js"
     },
     "scripts": {
-        "est": "node scripts/es-transpiler",
-        "pg": "node scripts/parser-generator",
+        "build": "node scripts/es-transpiler",
+        "generate": "node scripts/parser-generator",
         "lint": "eslint --cache bin scripts src",
         "test": "node scripts/spec-runner",
         "clean": "node scripts/cleaner"
