@@ -44,7 +44,6 @@
         "minimist": "1.2.0",
         "chalk": "2.1.0",
         "prettysize": "0.1.0",
-        "babel-polyfill": "7.0.0-alpha.20",
         "babel-runtime": "7.0.0-alpha.20"
     },
     "devDependencies": {

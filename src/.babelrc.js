@@ -2,12 +2,16 @@
 
 module.exports = {
 
-    "presets": [ "futagozaryuu", {
+    "presets": [
 
-        "runtime": true
+        [ "futagozaryuu", {
 
-    } ],
+            "runtime": { "polyfill": false }
 
-    "sourceMaps": "both"
+        } ]
+
+    ],
+
+    "sourceMaps": true,
 
 };

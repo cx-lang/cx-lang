@@ -17,7 +17,7 @@ const { join, relative } = require( "path" );
 const srcDir = join( __dirname, "..", "src", "cx-lang" );
 const outDir = join( __dirname, "..", "lib" );
 
-const babelrc = require( join( srcDir, ".babelrc" ) );
+const babelrc = require( join( srcDir, "..", ".babelrc" ) );
 babelrc.babelrc = false;
 babelrc.ignore = [
     "__tests__",
