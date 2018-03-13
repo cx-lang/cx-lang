@@ -6,11 +6,11 @@
 
 # about cx-lang
 
-CXLang is a statically typed programming language that has borrowed it's syntax from dynamic languages, and can transpile to any language you define.
+CXLang is a statically typed programming language that has borrowed it's syntax from dynamic, static and meta languages, and can transpile to any language you define within CXLang it self, whatever frontend your using (@cx-lang/transcript, @cx-lang/whitescript, etc).
 
 # version
 
-- Development: [v0.1-rev7](https://github.com/cx-lang/cx-lang/tree/v0.1-rev7)<br>
+- Development: [v0.1-rev8](https://github.com/cx-lang/cx-lang/tree/v0.1-rev8)<br>
 - Release:     [0.0.1](https://www.npmjs.com/package/cx-lang)
 
 **[erispa/cx](https://github.com/erispa/cx):** 2011+ (v0.1-rev1)<br>
@@ -18,7 +18,8 @@ CXLang is a statically typed programming language that has borrowed it's syntax 
 **[v0.1-rev5](https://github.com/cx-lang/cx-lang/tree/v0.1-rev5):** 2016<br>
 **[cx-lang/nodejs](https://github.com/cx-lang/nodejs):** 2016 (v0.1-rev6-dev)<br>
 **[v0.1-rev6](https://github.com/cx-lang/cx-lang/tree/v0.1-rev6):** 2017<br>
-**[v0.1-rev7](https://github.com/cx-lang/cx-lang/tree/v0.1-rev7):** 2017+
+**[v0.1-rev7](https://github.com/cx-lang/cx-lang/tree/v0.1-rev7):** 2017<br>
+**[v0.1-rev8](https://github.com/cx-lang/cx-lang/tree/v0.1-rev8):** 2018
 
 # install
 
@@ -39,5 +40,5 @@ CXLang is a statically typed programming language that has borrowed it's syntax 
 
 # license
 
-Copyright (c) 2011-2017 Futago-za Ryuu, Erispa<br>
+Copyright (c) 2011-2018 Futago-za Ryuu, Erispa<br>
 The MIT License, [http://opensource.org/licenses/MIT](http://opensource.org/licenses/MIT)
