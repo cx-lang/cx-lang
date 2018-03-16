@@ -28,5 +28,5 @@ yarn run bootstrap
 
 ## license
 
-Copyright (c) 2011-2018 Futago-za Ryuu, Erispa<br>
-The MIT License, [http://opensource.org/licenses/MIT](http://opensource.org/licenses/MIT)
+Copyright &copy; 2018 [Futago-za Ryuu](https://github.com/futagoza)<br>
+The MIT License, [opensource.org/licenses/MIT](http://opensource.org/licenses/MIT)
