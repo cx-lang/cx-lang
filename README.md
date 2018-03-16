@@ -1,7 +1,6 @@
 [![Build status](https://img.shields.io/travis/cx-lang/cx-lang.svg)](https://travis-ci.org/cx-lang/cx-lang)
 [![npm version](https://img.shields.io/npm/v/cx-lang.svg)](https://www.npmjs.com/package/cx-lang)
 [![dependencies](https://img.shields.io/david/cx-lang/cx-lang.svg)](https://david-dm.org/cx-lang/cx-lang)
-[![devDependencies](https://img.shields.io/david/dev/cx-lang/cx-lang.svg)](https://david-dm.org/cx-lang/cx-lang#info=devDependencies)
 [![License](https://img.shields.io/badge/license-mit-blue.svg)](https://opensource.org/licenses/MIT)
 [![hit count](https://hitt.herokuapp.com/cx-lang/cx-lang.svg)](https://github.com/cx-lang/cx-lang)
 
@@ -14,18 +13,18 @@ CXLang is a statically typed programming language that has borrowed it's syntax 
 
 ## install
 
-  ```shell
-  npm install -g cx-lang
-  ```
+```shell
+yarn install -g cx-lang
+```
 
 ## develop
 
-  ```shell
-  git clone https://github.com/cx-lang/cx-lang.git
-  cd cx-lang
-  npm install
-  make build
-  ```
+```shell
+git clone https://github.com/cx-lang/cx-lang.git
+cd cx-lang
+yarn install
+yarn run bootstrap
+```
 
 ## license
 
