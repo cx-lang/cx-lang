@@ -9,8 +9,10 @@ BooleanKeyword
   / FalseToken
 
 ContextKeyword
-  = GlobalToken
+  = BaseToken
+  / GlobalToken
   / ModuleToken
   / PackageToken
+  / SelfToken
   / SuperToken
   / ThisToken
