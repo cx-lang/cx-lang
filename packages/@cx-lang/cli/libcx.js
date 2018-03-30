@@ -3,21 +3,21 @@
 "use strict";
 
 const minimist = require( "minimist" );
-const cxlang = require( "../" );
-const { join, lstat } = cxlang.require( "file-system" );
-const { die } = cxlang.require( "utils/console" );
-const libcx = cxlang.require( "package-manager" );
+const cxlang = require( "@cx-lang/core" );
+const { join, lstat } = require( "@cx-lang/lib/fs" );
+const { die, log } = require( "@cx-lang/lib/console" );
+const pm = require( "@cx-lang/package-manager" );
 
 const argv = process.argv.slice( 2 );
 const cwd = process.cwd();
 
-lstat( join( cwd, "package.json" ) )
+lstat( join( cwd, "cargo.toml" ) )
 
     .then( function run( { exists, isFile, path } ) {
 
         if ( ! exists() || ! isFile() )
 
-            die( `libcx: Cannot find the config file '${ path }'` );
+            die( `libcx: Cannot find '${ path }'` );
 
         const command = argv.shift();
         const opts = minimist( argv );
@@ -27,7 +27,13 @@ lstat( join( cwd, "package.json" ) )
         opts.config = require( path );
         opts.cwd = opts.cwd || cwd;
 
-        return libcx( command, opts );
+        return pm( command, opts );
+
+    } )
+
+    .then( function done( result ) {
+
+        if ( typeof result === "string" ) log( result );
 
     } )
 
