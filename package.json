@@ -1,60 +1,14 @@
 {
-    "name": "cx-lang",
-    "version": "v0.8.0",
-    "description": "A statically typed dynamic language",
-    "keywords": [
-        "cx",
-        "cx-lang",
-        "parser",
-        "compiler",
-        "transpiler",
-        "ast",
-        "javascript",
-        "c++",
-        "cpp"
-    ],
-    "repository": "cx-lang/cx-lang",
-    "bugs": "https://github.com/cx-lang/cx-lang/issues",
-    "license": "MIT",
-    "author": "Futago-za Ryuu",
-    "files": [
-        "bin",
-        "lib"
-    ],
-    "main": "lib/cx-lang.js",
-    "bin": {
-        "cx-lang": "bin/cx-lang.js",
-        "libcx": "bin/libcx.js"
-    },
+    "private": true,
     "scripts": {
-        "build": "node scripts/es-transpiler",
-        "generate": "node scripts/parser-generator",
-        "lint": "eslint --cache bin scripts src",
-        "test": "node scripts/spec-runner",
-        "clean": "node scripts/cleaner"
+        "lint": "eslint --cache packages tools"
     },
     "dependencies": {
-        "camelcase": "4.1.0",
-        "json5": "0.5.1",
-        "bluebird": "3.5.0",
-        "mz": "2.6.0",
-        "mkdirp": "0.5.1",
-        "rimraf": "2.6.1",
-        "globby": "6.1.0",
-        "minimist": "1.2.0",
-        "chalk": "2.1.0",
-        "prettysize": "0.1.0",
-        "babel-runtime": "7.0.0-alpha.20"
-    },
-    "devDependencies": {
-        "pegjs-dev": "0.10.0-156",
+        "pegjs": "dev",
+        "mocha": "~5.0.0",
+        "typescript": "^2.8.0",
         "eslint": "4.6.x",
-        "eslint-config-futagozaryuu": "3.5.x",
-        "babel-register": "7.0.0-alpha.20",
-        "babel-core": "7.0.0-alpha.20",
-        "babel-preset-futagozaryuu": "2.8.x",
-        "mocha": "3.5.x",
-        "chai": "4.1.x"
+        "eslint-config-futagozaryuu": "3.5.x"
     },
     "engines": {
         "node": ">= 6.0.0"

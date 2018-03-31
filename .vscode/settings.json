@@ -1,5 +1,8 @@
 {
     "path-intellisense.mappings": {
-        "/": "${workspaceRoot}/src"
+        "/": [
+            "${workspaceRoot}/packages",
+            "${workspaceRoot}/tools"
+        ]
     }
 }

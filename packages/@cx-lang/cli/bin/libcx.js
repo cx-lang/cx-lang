@@ -1,9 +1,6 @@
-#!/usr/bin/env node
-
 "use strict";
 
 const minimist = require( "minimist" );
-const cxlang = require( "@cx-lang/core" );
 const { join, lstat } = require( "@cx-lang/lib/fs" );
 const { die, log } = require( "@cx-lang/lib/console" );
 const pm = require( "@cx-lang/package-manager" );

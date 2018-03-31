@@ -1,7 +1,6 @@
-/examples/**/output
-/lib
-/node_modules
-/*.sublime-*
-/.eslintcache
-/npm-debug.log
-/package-lock.json
+examples/**/output
+node_modules
+*.sublime-*
+.eslintcache
+*.log
+package-lock.json

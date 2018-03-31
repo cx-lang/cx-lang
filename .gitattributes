@@ -1,2 +1,5 @@
 * text=auto
-bin/*.js text eol=lf
+packages/@cx-lang/cli/bin/cx-lang text eol=lf
+packages/@cx-lang/cli/bin/libcx text eol=lf
+tools/cx-lang/bin/cx-lang text eol=lf
+tools/cx-lang/bin/libcx text eol=lf
