@@ -1,0 +1,35 @@
+{
+    "name": "@cx-lang/cli",
+    "version": "v0.8.0",
+    "description": "Command line tools for CX",
+    "keywords": [
+        "cx-lang",
+        "cli",
+        "package-manager"
+    ],
+    "repository": "cx-lang/cx-lang",
+    "bugs": "https://github.com/cx-lang/cx-lang/issues",
+    "license": "MIT",
+    "author": "Futago-za Ryuu",
+    "files": [
+        "bin",
+        "lib",
+        "index.d.ts"
+    ],
+    "main": "index.js",
+    "bin": {
+        "cx-lang": "bin/cx-lang",
+        "libcx": "bin/libcx"
+    },
+    "scripts": {
+        "build": "tsc",
+        "test": "pest"
+    },
+    "devDependencies": {
+        "@cx-lang/pest": "*",
+        "typescript": "^2.8.0"
+    },
+    "engines": {
+        "node": ">= 6.0.0"
+    }
+}

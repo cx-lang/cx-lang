@@ -1,0 +1,31 @@
+{
+    "name": "@cx-lang/pest",
+    "version": "v0.1.0",
+    "description": "A thin layer on top of Mocha for simpler testing",
+    "keywords": [
+        "cx-lang",
+        "mocha",
+        "test"
+    ],
+    "repository": "cx-lang/cx-lang",
+    "bugs": "https://github.com/cx-lang/cx-lang/issues",
+    "license": "MIT",
+    "author": "Futago-za Ryuu",
+    "files": [
+        "index.js",
+        "index.d.ts"
+    ],
+    "main": "index.js",
+    "scripts": {
+        "build": "tsc",
+        "test": "mocha test"
+    },
+    "dependencies": {
+        "pegjs": "dev",
+        "mocha": "~5.0.0",
+        "typescript": "^2.8.0"
+    },
+    "engines": {
+        "node": ">= 6.0.0"
+    }
+}

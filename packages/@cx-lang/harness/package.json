@@ -1,0 +1,32 @@
+{
+    "name": "@cx-lang/harness",
+    "version": "v0.8.0",
+    "description": "Benchmark and spec test runner for CX packages",
+    "keywords": [
+        "cx-lang",
+        "benchmark",
+        "spec",
+        "test",
+        "runner"
+    ],
+    "repository": "cx-lang/cx-lang",
+    "bugs": "https://github.com/cx-lang/cx-lang/issues",
+    "license": "MIT",
+    "author": "Futago-za Ryuu",
+    "files": [
+        "index.js",
+        "index.d.ts"
+    ],
+    "main": "index.js",
+    "scripts": {
+        "build": "tsc",
+        "test": "pest"
+    },
+    "devDependencies": {
+        "@cx-lang/pest": "*",
+        "typescript": "^2.8.0"
+    },
+    "engines": {
+        "node": ">= 6.0.0"
+    }
+}

@@ -1,0 +1,35 @@
+{
+    "name": "cx-lang",
+    "version": "v0.8.0",
+    "description": "A statically typed dynamic language",
+    "keywords": [
+        "cx-lang",
+        "typed",
+        "static",
+        "dynamic",
+        "language"
+    ],
+    "repository": "cx-lang/cx-lang",
+    "bugs": "https://github.com/cx-lang/cx-lang/issues",
+    "license": "MIT",
+    "author": "Futago-za Ryuu",
+    "files": [
+        "bin",
+        "lib",
+        "index.d.ts"
+    ],
+    "main": "index.js",
+    "bin": {
+        "cx-lang": "bin/cx-lang",
+        "libcx": "bin/libcx"
+    },
+    "scripts": {
+        "build": "tsc"
+    },
+    "devDependencies": {
+        "typescript": "^2.8.0"
+    },
+    "engines": {
+        "node": ">= 6.0.0"
+    }
+}
