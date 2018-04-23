@@ -9,7 +9,7 @@ CXLang is a statically typed programming language that has borrowed it's syntax 
 ## version
 
 - Development: [v0.8](https://github.com/cx-lang/cx-lang/tree/master)<br>
-- Release:     [0.0.1](https://www.npmjs.com/package/cx-lang) | [History](https://github.com/pegjs/pegjs/blob/master/docs/history.md)
+- Release:     [0.0.1](https://www.npmjs.com/package/cx-lang) | [History](https://github.com/cx-lang/cx-lang/blob/master/docs/history.md)
 
 ## install
 
